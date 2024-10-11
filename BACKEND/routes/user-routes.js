@@ -1,5 +1,5 @@
 import express from 'express'
-import { register, login, logout, getMyProfile, updateProfile, forgotPassword, resetPassword, home } from '../controllers/user-controller.js';
+import { register, login, logout, getMyProfile, updateProfile, forgotPassword, resetPassword, home, verifyEmail } from '../controllers/user-controller.js';
 import authMiddleware from '../middlewares/auth-middleware.js';
 import signupSchema from "../validators/signup-validator.js"
 import loginSchema from "../validators/login-validator.js"
@@ -9,6 +9,7 @@ const router = express.Router();
 // Routes for Register, Login, etc.
 router.route("/").get(home)
 router.route("/register").post(validate(signupSchema), register)
+router.route("/verifyEmail").post(verifyEmail);
 router.route("/login").post(validate(loginSchema), login)
 router.route("/logout").post(logout)
 router.route("/me").get(authMiddleware, getMyProfile);

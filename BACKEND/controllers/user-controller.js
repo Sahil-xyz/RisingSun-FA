@@ -1,7 +1,9 @@
 import bcrypt from "bcryptjs"
 import crypto from "crypto";
 import { User } from "../models/user-model.js";
-import { sendEmail } from '../utils/sendEmail.js';
+import { sendVerificationCode, sendWelcomeEmail } from "../utils/email.js";
+import { generateTokenAndSetCookies } from "../utils/generateEmailcode.js";
+// import { sendEmail } from '../utils/sendEmail.js';
 
 
 export const home = async (req, res) => {
@@ -38,13 +40,23 @@ export const register = async (req, res) => {
         success: false,
       });
     }
+
+    // Cretating verificationCode
+    const verificationCode = Math.floor(100000 + Math.random() * 900000).toString()
     
     // Store user in database
     const userCreated = await User.create({
       username,
       email,
-      password
+      password,
+      verificationCode,
+      verificationCodeExpire:Date.now() + 24 * 60 * 60 * 1000
     })
+
+
+    
+    await sendVerificationCode(email,verificationCode);
+    generateTokenAndSetCookies(res, userCreated._id)
 
     // Success message & create token
     res.status(201).json({
@@ -62,6 +74,36 @@ export const register = async (req, res) => {
     }); 
   }
 };
+
+export const verifyEmail = async(req, res) => {
+  try {
+    const { code } = req.body;
+    const user = await User.findOne({
+      verificationCode: code,
+    });
+    if (!user) {
+      return res.status(400).json({
+        message: "Invalid verification code.",
+        success: false,
+      });
+    }
+    user.isVerified = true;
+    user.verificationCode=undefined;
+    user.verificationCodeExpire=undefined;
+    await user.save();
+    await sendWelcomeEmail(user.email,user.name)
+    res.status(200).json({
+      message: "Email verified successfully.",
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Failed to verify email.",
+      success: false,
+    });
+  }
+}
 
 // Login api
 export const login = async (req, res) => {
@@ -217,7 +259,6 @@ export const forgotPassword = async (req, res, next) => {
     })
   }
 }
-
 
 // Reset Password
 export const resetPassword = async(req, res, next) => {

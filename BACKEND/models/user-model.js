@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    isVerified: {
+      type: Boolean,
+      default: false
+    },
     isAdmin: {
         type: Boolean,
         default: false
@@ -27,7 +31,9 @@ const userSchema = new mongoose.Schema({
     resetPasswordTokenExpire: {
         type: Date,
     },
-})
+    verificationCode: String,
+    verificationCodeExpire: Date
+},{timestamps: true})
 
 // Encrypt Data using pre method
 userSchema.pre('save', async function (next) {
