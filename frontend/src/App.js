@@ -5,6 +5,7 @@ import Navbar from "./pages/Navbar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
+import Admission from "./pages/Admission";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/admission" element={<Admission/>}/>
       </Routes>
       <Toaster position="bottom-right" reverseOrder={false} />
     </>
