@@ -1,14 +1,34 @@
 import React from 'react'
+import axios from 'axios';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { loginSuccess } from '../redux/authSlice'
+import toast from 'react-hot-toast';
 
 const Login=()=>{  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
+    // console.log("Email:", email);
+    // console.log("Password:", password);
+    try{
+      const { data } = await axios.post('http://localhost:8000/api/v1/user/login', {email, password});
+      if(data.success) {
+        localStorage.setItem('token',data.token)
+        dispatch(loginSuccess({ token: data.token, userId: data.userId, username: data.username }));
+        navigate('/');
+        toast.success("Login successfull...");
+      } else{
+        toast.error("Invalid email or password");
+      }
+    } catch(error) {
+      console.log(error);
+    }
   };
 
   const handleGoogleLogin = () => {

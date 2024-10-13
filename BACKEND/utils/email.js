@@ -20,7 +20,7 @@ export const sendVerificationCode = async(email, verificationCode) => {
 
 export const sendWelcomeEmail=async(email,name)=>{
     try {
-     const response=   await transporter.sendMail({
+    const response=   await transporter.sendMail({
             from: '"Rising-Sun Football Academy" <risingsun18@gmail.com>',
 
             to: email, // list of receivers

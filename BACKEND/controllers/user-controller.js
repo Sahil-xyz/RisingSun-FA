@@ -53,8 +53,6 @@ export const register = async (req, res) => {
       verificationCodeExpire:Date.now() + 24 * 60 * 60 * 1000
     })
 
-
-    
     await sendVerificationCode(email,verificationCode);
     generateTokenAndSetCookies(res, userCreated._id)
 
@@ -141,6 +139,7 @@ export const login = async (req, res) => {
         message: `User Login Successful`,
         token: await user.generateToken(),
         userId: user._id.toString(),
+        username: user.username,
         success: true
       })
     }

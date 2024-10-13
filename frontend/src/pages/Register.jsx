@@ -1,18 +1,31 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 const Register=()=>{
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Handle registration logic here
+    try {
+      await axios.post('http://localhost:8000/api/v1/user/register', {username, email, password})
+      toast.success("Registration successful , Please verify your email.")
+      navigate('/verify')
+    } catch (error) {
+  console.error("Error response:", error.response);  // Log full response to inspect
+  const errorMessage = error.response?.data?.message || error.message || "An error occurred";
+  toast.error(errorMessage);
+
+    }
   };
   return(
 <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 bg-[url('https://sesafootballacademy.in/wp-content/themes/sfa-home/images/bag.jpg')] bg-cover bg-center">
       <div className="flex flex-col items-center sm:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg p-8 sm:p-12 bg-[rgba(255,255,255,0.20)] backdrop-blur-lg justify-center">
-        
         <div className="w-full sm:w-1/2">
           <div className="flex justify-center items-center mb-8">
             <div className="text-3xl font-bold text-red-500">Rising Sun Football Academy</div>
