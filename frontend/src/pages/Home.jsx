@@ -2,10 +2,9 @@ import React from 'react'
 import homeImage from '../assets/mainTeamImage.jpg'
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-=======
+
 import { useSelector } from 'react-redux';
->>>>>>> 1494b033bdfd2e03b62af07698b372d92a28a443
+
 
 const Home = () => {
   const {isLoggedIn} = useSelector((state) => state.auth);
