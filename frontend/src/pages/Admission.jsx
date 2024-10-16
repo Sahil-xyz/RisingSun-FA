@@ -152,4 +152,4 @@ function Admission() {
   )
 }
 
-export default Admission
+export default Admission;

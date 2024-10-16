@@ -1,45 +1,19 @@
 import React from 'react'
-import axios from 'axios';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { loginSuccess } from '../redux/authSlice'
-import toast from 'react-hot-toast';
-
+import { useState } from 'react';// import Footer from './Footer';
 const Login=()=>{  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleSubmit = async(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    // console.log("Email:", email);
-    // console.log("Password:", password);
-    try{
-      const { data } = await axios.post('http://localhost:8000/api/v1/user/login', {email, password});
-      if(data.success) {
-        localStorage.setItem('token',data.token)
-        dispatch(loginSuccess({ token: data.token, userId: data.userId, username: data.username }));
-        navigate('/');
-        toast.success("Login successfull...");
-      } else{
-        toast.error("Invalid email or password");
-      }
-    } catch(error) {
-      const errorMessage = error.response?.data?.message || error.message || "An error occurred";
-      toast.error(errorMessage);
-    } finally {
-      setLoading(false);
-    }
+    console.log("Email:", email);
+    console.log("Password:", password);
   };
 
   const handleGoogleLogin = () => {
     // GOgle login
   };
 
+  
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 bg-[url('https://sesafootballacademy.in/wp-content/themes/sfa-home/images/bag.jpg')] bg-cover bg-center">
     <div className="flex flex-col items-center sm:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg p-8 sm:p-12 bg-[rgba(255,255,255,0.20)] backdrop-blur-lg justify-center">
@@ -84,13 +58,7 @@ const Login=()=>{
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              {
-                loading ? (
-                  'Signing in...'
-                ) : (
-                  'Sign in'
-                )
-              }
+              Sign Up
             </button>
           </div>
           <div className="flex justify-center mb-4">
@@ -113,17 +81,19 @@ const Login=()=>{
             </button>
           </div>
           <p className="text-center text-black">
-            Don't have an account?{' '}
-            <a href="/register" className="text-blue-500 hover:underline">
-              Register
+            Already have an account?{' '}
+            <a href="/Register" className="text-blue-500 hover:underline">
+              Login
             </a>
           </p>
         </form>
       </div>
     </div>
+   
   </div>
+   
   
   );
 }
 
-export default Login
+export default Login;
