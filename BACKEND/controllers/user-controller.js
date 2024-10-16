@@ -140,6 +140,7 @@ export const login = async (req, res) => {
         token: await user.generateToken(),
         userId: user._id.toString(),
         username: user.username,
+        isAdmin: user.isAdmin,
         success: true
       })
     }
@@ -153,6 +154,8 @@ export const login = async (req, res) => {
     })
   }
 }
+
+// Google oauth
 
 // Logout
 export const logout = async (req, res) => {

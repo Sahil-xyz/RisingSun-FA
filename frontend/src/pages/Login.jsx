@@ -9,11 +9,13 @@ import toast from 'react-hot-toast';
 const Login=()=>{  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    setLoading(true);
     // console.log("Email:", email);
     // console.log("Password:", password);
     try{
@@ -27,7 +29,10 @@ const Login=()=>{
         toast.error("Invalid email or password");
       }
     } catch(error) {
-      console.log(error);
+      const errorMessage = error.response?.data?.message || error.message || "An error occurred";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,7 +84,13 @@ const Login=()=>{
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Sign Up
+              {
+                loading ? (
+                  'Signing in...'
+                ) : (
+                  'Sign in'
+                )
+              }
             </button>
           </div>
           <div className="flex justify-center mb-4">
@@ -102,9 +113,9 @@ const Login=()=>{
             </button>
           </div>
           <p className="text-center text-black">
-            Already have an account?{' '}
-            <a href="/Register" className="text-blue-500 hover:underline">
-              Login
+            Don't have an account?{' '}
+            <a href="/register" className="text-blue-500 hover:underline">
+              Register
             </a>
           </p>
         </form>

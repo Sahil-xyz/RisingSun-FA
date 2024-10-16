@@ -9,6 +9,7 @@ export const authSlice = createSlice({
     userId: null,
     username: null,
     token: null,
+    isAdmin: null,
   },
   reducers: {
     loginSuccess: (state, action) => {
@@ -16,12 +17,14 @@ export const authSlice = createSlice({
       state.token = action.payload.token;
       state.userId = action.payload.userId;
       state.username = action.payload.username;
+      state.isAdmin = action.payload.isAdmin;
     },
     logout: (state) => {
       state.isLoggedIn = false;
       state.token = null;
       state.userId = null;
       state.username = null;
+      state.isAdmin = null;
     },
   },
 });

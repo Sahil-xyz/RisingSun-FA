@@ -4,27 +4,30 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const Register=()=>{
+const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      await axios.post('http://localhost:8000/api/v1/user/register', {username, email, password})
+      await axios.post('http://localhost:8000/api/v1/user/register', { username, email, password })
       toast.success("Registration successful , Please verify your email.")
       navigate('/verify')
     } catch (error) {
-  console.error("Error response:", error.response);  // Log full response to inspect
-  const errorMessage = error.response?.data?.message || error.message || "An error occurred";
-  toast.error(errorMessage);
-
+      console.error("Error response:", error.response);  // Log full response to inspect
+      const errorMessage = error.response?.data?.message || error.message || "An error occurred";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
-  return(
-<div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 bg-[url('https://sesafootballacademy.in/wp-content/themes/sfa-home/images/bag.jpg')] bg-cover bg-center">
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 bg-[url('https://sesafootballacademy.in/wp-content/themes/sfa-home/images/bag.jpg')] bg-cover bg-center">
       <div className="flex flex-col items-center sm:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg p-8 sm:p-12 bg-[rgba(255,255,255,0.20)] backdrop-blur-lg justify-center">
         <div className="w-full sm:w-1/2">
           <div className="flex justify-center items-center mb-8">
@@ -80,7 +83,12 @@ const Register=()=>{
                 className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Register
+                { loading ? (
+                  'Registering...'
+                ): (
+                  'Register'
+                )
+                }
               </button>
             </div>
             <p className="text-center text-black">
