@@ -5,7 +5,7 @@ import AdminTeams from "./AdminTeams";
 import AdminDashboard from "./AdminDashboard";
 // import ErrorPage from "../../pages/ErrorPage";
 // import { useAuth } from "../../store/auth";
-import AdmissionsPage from "../../pages/AdmissionPage";
+import AdmissionPage from "../../pages/AdmissionPage";
 
 const Admin = () => {
   // Checks if the user is Admin or not.
@@ -23,7 +23,7 @@ const Admin = () => {
         <Routes>
           <Route path="/" element={<AdminDashboard />} />
           <Route path="/teams" element={<AdminTeams />} />
-          <Route path="/admission" element={<AdmissionsPage />} />
+          <Route path="/admission" element={<AdmissionPage />} />
         </Routes>
       </div>
     </div>

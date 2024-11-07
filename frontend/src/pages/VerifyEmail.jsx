@@ -1,87 +1,106 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Assuming you have routing set up
 
 const VerifyEmail = () => {
-  const [otp, setOtp] = useState(Array(6).fill("")); // Array with 6 empty strings
-  const inputRefs = useRef([]); // Array of refs for each input field
+  const [otp, setOtp] = useState(Array(6).fill("")); // Array for OTP input (6 characters)
+  const [loading, setLoading] = useState(false); // Loading state to disable the submit button while waiting for the response
+  const [errorMessage, setErrorMessage] = useState(""); // State for error messages
+  const [successMessage, setSuccessMessage] = useState(""); // State for success messages
+  const navigate = useNavigate(); // For redirecting on success, if needed
 
-  const handleKeyDown = (e) => {
-    if (
-      !/^[0-9]{1}$/.test(e.key) &&
-      e.key !== "Backspace" &&
-      e.key !== "Delete" &&
-      e.key !== "Tab" &&
-      !e.metaKey
-    ) {
-      e.preventDefault();
-    }
-
-    if (e.key === "Delete" || e.key === "Backspace") {
-      const index = inputRefs.current.indexOf(e.target);
-      if (index > 0) {
-        setOtp((prevOtp) => [
-          ...prevOtp.slice(0, index - 1),
-          "",
-          ...prevOtp.slice(index),
-        ]);
-        inputRefs.current[index - 1].focus();
-      }
-    }
-  };
-
+  // Handle input changes
   const handleInput = (e) => {
-    const { target } = e;
-    const index = inputRefs.current.indexOf(target);
-    if (target.value) {
+    const { value, maxLength, name } = e.target;
+    const index = parseInt(name);
+
+    if (value.length <= maxLength) {
       setOtp((prevOtp) => [
         ...prevOtp.slice(0, index),
-        target.value,
+        value,
         ...prevOtp.slice(index + 1),
       ]);
-      if (index < otp.length - 1) {
-        inputRefs.current[index + 1].focus();
+      if (index < otp.length - 1 && value) {
+        document.getElementById(`otp-input-${index + 1}`).focus();
       }
     }
   };
 
-  const handleFocus = (e) => {
-    e.target.select();
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage("");
+    setSuccessMessage("");
+    setLoading(true);
+
+    const otpCode = otp.join("");
+
+    try {
+      const response = await axios.post("http://localhost:8000/api/v1/user/verifyEmail", { code: otpCode });
+
+      if (response.data.success) {
+        setSuccessMessage("Email verified successfully!");
+        // Redirect to another page (e.g., dashboard or home)
+        setTimeout(() => navigate("/"), 500); // Redirect after 2 seconds
+      } else {
+        setErrorMessage(response.data.message || "Something went wrong.");
+      }
+    } catch (error) {
+      setErrorMessage("Failed to verify email. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handlePaste = (e) => {
-    e.preventDefault();
-    const text = e.clipboardData.getData("text");
-    if (!new RegExp(`^[0-9]{${otp.length}}$`).test(text)) {
-      return;
+  // Handle key down for only numeric inputs
+  const handleKeyDown = (e) => {
+    if (!/^[0-9]{1}$/.test(e.key) && e.key !== "Backspace" && e.key !== "Delete") {
+      e.preventDefault();
     }
-    const digits = text.split("");
-    setOtp(digits);
   };
 
   return (
     <section className="bg-white py-10 dark:bg-dark">
-    <div className="container">
-      <form id="otp-form" className="flex gap-2">
-        {otp.map((digit, index) => (
-          <input
-            key={index}
-            type="text"
-            maxLength={1}
-            value={digit}
-            onChange={handleInput}
-            onKeyDown={handleKeyDown}
-            onFocus={handleFocus}
-            onPaste={handlePaste}
-            ref={(el) => (inputRefs.current[index] = el)}
-            className="shadow-xs flex w-[64px] items-center justify-center rounded-lg border border-stroke bg-white p-2 text-center text-2xl font-medium text-gray-5 outline-none sm:text-4xl dark:border-dark-3 dark:bg-white/5"
-          />
-        ))}
-        {/* You can conditionally render a submit button here based on otp length */}
-      </form>
-    </div>
-  </section>
+      <div className="container max-w-md mx-auto">
+        <h2 className="text-2xl font-semibold text-center">Verify Your Email</h2>
+        <form
+          onSubmit={handleSubmit}
+          id="otp-form"
+          className="flex flex-col gap-4 items-center mt-6"
+        >
+          <div className="flex gap-2">
+            {otp.map((digit, index) => (
+              <input
+                key={index}
+                id={`otp-input-${index}`}
+                type="text"
+                name={index.toString()}
+                maxLength={1}
+                value={digit}
+                onChange={handleInput}
+                onKeyDown={handleKeyDown}
+                className="shadow-xs flex w-[64px] items-center justify-center rounded-lg border border-stroke bg-white p-2 text-center text-2xl font-medium text-gray-5 outline-none sm:text-4xl dark:border-dark-3 dark:bg-white/5"
+              />
+            ))}
+          </div>
+
+          {errorMessage && (
+            <div className="text-red-500 mt-3 text-center">{errorMessage}</div>
+          )}
+          {successMessage && (
+            <div className="text-green-500 mt-3 text-center">{successMessage}</div>
+          )}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="mt-6 bg-blue-500 text-white py-2 px-4 rounded-lg disabled:bg-gray-400"
+          >
+            {loading ? "Verifying..." : "Verify Email"}
+          </button>
+        </form>
+      </div>
+    </section>
   );
 };
 
