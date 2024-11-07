@@ -1,19 +1,92 @@
-import React from 'react'
-import { useState } from 'react';// import Footer from './Footer';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
+import toast from "react-hot-toast";
+import { MdExitToApp } from "react-icons/md";
+// import { useGoogleLogin } from '@react-oauth/google'
+
+// Backend Login Route
+export const USER_API_END_POINT = "http://localhost:8000/api/v1/user/login";
+
 const Login=()=>{  
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
+  // Store user data in local state
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  // useAuth provides access to storeTokenInLS which is used to store the data in local storage
+  const { storeTokenInLS } = useAuth();
+  // It navigates user after successful login
+  const navigate = useNavigate();
+
+  // update the component's state when user gives data
+  const handleInput = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setUser({
+      ...user,
+      [name]: value,
+    });
   };
 
-  const handleGoogleLogin = () => {
-    // GOgle login
+  // Login function logic
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevents from default behaviour of reloading the page
+    setLoading(true);
+    try {
+      // This method send the data in backend request body(req)
+      const res = await fetch(USER_API_END_POINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user), // send the user data
+      });
+
+      // Convert the response body into json
+      const res_data = await res.json();
+
+      if (res.ok) {
+        storeTokenInLS(res_data.token); // store the data in local storage
+        setUser({ email: "", password: "" });
+        toast.success("Logged in successfully"); // toast is used to print message on frontend
+        navigate("/"); // Navigate to Home after successful login
+      }
+      else {
+        toast.error(res_data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Invalid credentials");
+    } finally {
+      setLoading(false);
+    }
   };
 
+  const responseGoogle = async(authResult) => {
+    // try {
+    //   if(authResult['code']) {
+        
+    //   }
+    //   console.log(authResult)
+    // } catch (err) {
+    //   console.error('Error while requesting google code : ', err)
+    // }
+  }
+
+  // const handleGoogleLogin = useGoogleLogin({
+  //   onSuccess: () => {},
+  //   onError: () => {},
+  //   flow: 'auth-code'
+  // })
   
+  const handleGoogleLogin = () => {
+
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 bg-[url('https://sesafootballacademy.in/wp-content/themes/sfa-home/images/bag.jpg')] bg-cover bg-center">
     <div className="flex flex-col items-center sm:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg p-8 sm:p-12 bg-[rgba(255,255,255,0.20)] backdrop-blur-lg justify-center">
@@ -31,11 +104,11 @@ const Login=()=>{
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
+              name="email"
               type="email"
               placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={user.email}
+              onChange={handleInput}
               required
             />
           </div>
@@ -45,21 +118,32 @@ const Login=()=>{
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
+              name="password"
               type="password"
               placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={user.password}
+              onChange={handleInput}
               required
             />
           </div>
           <div className="mb-4">
-            <button
+            {
+              loading ? (
+                <button
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Sign Up
+              Logging in...
             </button>
+              ) : (
+                <button
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Login
+            </button>
+              )
+            }
           </div>
           <div className="flex justify-center mb-4">
             <button
@@ -81,10 +165,10 @@ const Login=()=>{
             </button>
           </div>
           <p className="text-center text-black">
-            Already have an account?{' '}
-            <a href="/Register" className="text-blue-500 hover:underline">
-              Login
-            </a>
+            Don't have an account?{' '}
+            <Link to="/register" className="text-blue-500 hover:underline">
+              Register
+            </Link>
           </p>
         </form>
       </div>

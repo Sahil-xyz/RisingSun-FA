@@ -1,13 +1,64 @@
-import React from "react";
-import { useState } from "react";
-const Register=()=>{
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle registration logic here
+// Backend registeration route
+export const USER_API_END_POINT = "http://localhost:8000/api/v1/user/register";
+
+const Register=()=>{
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  // Shows loading when we click on submit button
+  const [loading, setLoading] = useState(false);
+  // useAuth provides access to storeTokenInLS which is used to store the data in local storage
+  // const { storeTokenInLS} = useAuth();
+  // It navigates user after successful register
+  const navigate = useNavigate();
+
+  // update the component's state when user gives data
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]: value || "",
+    });
+  };
+
+  // Registration function login
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevents from default behaviour of reloading the page
+    setLoading(true);
+    try {
+      // This method send the data in backend request body(req)
+      const res = await fetch(USER_API_END_POINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),  // send the user data in request body
+      });
+
+      // Convert the response body into json
+      const res_data = await res.json();
+      if (res.ok) {
+        // storeTokenInLS(res_data.token);  // store the data in local storage
+        setUser({ userName: "", email: "", password: "" });
+        toast.success(res_data.message); // toast is used to print message on frontend
+        navigate("/verify"); // Navigate to login after successful register
+      } else {
+        toast.error(res_data.extraDetails || res_data.message);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+      console.log(error);
+      toast.error("Error occured");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return(
@@ -27,11 +78,11 @@ const Register=()=>{
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username"
                 type="text"
+                name="username"
                 placeholder="Enter your username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={user.username}
+                onChange={handleInput}
                 required
               />
             </div>
@@ -41,11 +92,11 @@ const Register=()=>{
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
                 type="email"
+                name="email"
                 placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={user.email}
+                onChange={handleInput}
                 required
               />
             </div>
@@ -55,27 +106,36 @@ const Register=()=>{
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="password"
+                name="password"
                 type="password"
+                value={user.password}
                 placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleInput}
                 required
               />
             </div>
             <div className="mb-4">
-              <button
+              { loading ? (
+                <button
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                Registering...
+              </button>
+              ) : (
+                <button
                 className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Register
               </button>
+              )}
             </div>
             <p className="text-center text-black">
               Already have an account?{' '}
-              <a href="/login" className="text-blue-500 hover:underline">
+              <Link to="/login" className="text-blue-500 hover:underline">
                 Login
-              </a>
+              </Link>
             </p>
           </form>
         </div>

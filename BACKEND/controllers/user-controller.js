@@ -155,7 +155,7 @@ export const login = async (req, res) => {
   }
 }
 
-// Google oauth
+// Google oauth signup
 
 // Logout
 export const logout = async (req, res) => {
@@ -244,8 +244,10 @@ export const forgotPassword = async (req, res, next) => {
     const resetToken = await user.getResetToken();
     await user.save();
 
+    // Integrate with frontend URL
     const url = `${process.env.FRONTEND_URL}/resetPassword/${resetToken}`;
     const message = `Click on the link to reset your password. ${url}. if you have not requested then please ignore.`
+
     // Send token via email
     await sendEmail(user.email, "Football Academy Reset Password", message)
 

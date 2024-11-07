@@ -17,7 +17,10 @@ export const createAdmission = async (req, res) => {
     await newAdmission.save();
     res.status(201).json({ message: 'Admission created successfully', admission: newAdmission });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.log(error)
+    res.status(400).json({
+      error
+    })
   }
 };
 
@@ -59,3 +62,23 @@ export const deleteAdmission = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+export const getAdmissionUsers = async(req, res) => {
+  try {
+    const admissionUsers = await Admission.find();
+    
+    if(!admissionUsers || admissionUsers.length == 0) {
+      res.status(404).json({
+        message: "No users found"
+      })
+    }
+
+    res.status(200).json({
+      admissionUsers,
+      success: true
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
+}

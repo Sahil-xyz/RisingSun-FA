@@ -1,11 +1,8 @@
-
 import React from 'react';
 import homeImage from '../assets/mainTeamImage.jpg';
 import Footer from './Footer';
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { Link } from 'react-router-dom';
-
-import { useSelector } from 'react-redux';
 
 
 const Home = () => {

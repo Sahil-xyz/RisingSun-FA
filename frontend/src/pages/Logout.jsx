@@ -1,12 +1,18 @@
-import React from 'react'
-import { logout } from '../redux/authSlice';
-import { useDispatch } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
 
 const Logout = () => {
-    const dispatch = useDispatch();
-    dispatch(logout());
-  return <Navigate to="/login" />
-}
+  // access LogoutUser function which is declared in useAuth 
+  const { LogoutUser } = useAuth();
 
-export default Logout
+  // useEffect() ensures the logout function is performed when called
+  useEffect(() => {
+    LogoutUser();
+  }, [LogoutUser]);
+
+  // Navigate to login page after successful logout
+  return <Navigate to="/login" />;
+};
+
+export default Logout;
