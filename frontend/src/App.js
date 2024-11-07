@@ -7,10 +7,8 @@ import Logout from './pages/Logout'
 import Register from "./pages/Register"; // Adjusted path for Register
 import { Toaster } from "react-hot-toast"; // Toaster for notifications
 import VerifyEmail from "./pages/VerifyEmail"
-import Footer from "./pages/Footer";
 import Profile from "./pages/Profile";
 import Girls from "./pages/Girls";
-import VerifyEmail from "./pages/VerifyEmail"
 import Footer from "./pages/Footer";
 import Boys from "./pages/Boys";
 import History from "./pages/History";
@@ -19,8 +17,6 @@ import Achievement from "./pages/Achievment";
 import Vision from "./pages/Vision";
 import Location from "./pages/Location";
 import Support from "./pages/Support";
-// Create UserContext
-export const UserContext = createContext();
 
 // Main App component
 //import { Verify } from "crypto";

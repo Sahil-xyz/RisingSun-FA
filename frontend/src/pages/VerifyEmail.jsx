@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 
 const VerifyEmail = () => {
-  const [otp, setOtp] = useState(Array(4).fill("")); // Array with 6 empty strings
+  const [otp, setOtp] = useState(Array(6).fill("")); // Array with 6 empty strings
   const inputRefs = useRef([]); // Array of refs for each input field
 
   const handleKeyDown = (e) => {

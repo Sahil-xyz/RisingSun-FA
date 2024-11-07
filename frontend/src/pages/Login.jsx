@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import toast from "react-hot-toast";
 import { MdExitToApp } from "react-icons/md";
-import { useGoogleLogin } from "@react-oauth/google";
+// import { useGoogleLogin } from "@react-oauth/google";
 
 export const USER_API_END_POINT = "http://localhost:8000/api/v1/user/login";
 
@@ -44,29 +44,32 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      try {
-        const res = await fetch("http://localhost:8000/api/v1/user/google-login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token: tokenResponse.access_token }),
-        });
-        const res_data = await res.json();
+  // const handleGoogleLogin = useGoogleLogin({
+    // onSuccess: async (tokenResponse) => {
+    //   try {
+    //     const res = await fetch("http://localhost:8000/api/v1/user/google-login", {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({ token: tokenResponse.access_token }),
+    //     });
+    //     const res_data = await res.json();
 
-        if (res.ok) {
-          storeTokenInLS(res_data.token);
-          toast.success("Google login successful");
-          navigate("/");
-        } else {
-          toast.error(res_data.message);
-        }
-      } catch (error) {
-        toast.error("Google login failed");
-      }
-    },
-    onError: () => toast.error("Google login failed"),
-  });
+    //     if (res.ok) {
+    //       storeTokenInLS(res_data.token);
+    //       toast.success("Google login successful");
+    //       navigate("/");
+    //     } else {
+    //       toast.error(res_data.message);
+    //     }
+    //   } catch (error) {
+    //     toast.error("Google login failed");
+    //   }
+    // },
+    // onError: () => toast.error("Google login failed"),
+  // });
+  const handleGoogleLogin = () => {
+    
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 bg-[url('https://sesafootballacademy.in/wp-content/themes/sfa-home/images/bag.jpg')] bg-cover bg-center">
