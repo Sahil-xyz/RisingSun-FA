@@ -1,13 +1,20 @@
 import React, { createContext, useReducer } from "react";
-import Navbar from "./Navbar/Navbar"; // Adjusted path for Navbar
+import Navbar from "./pages/Navbar"; // Adjusted path for Navbar
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home"; // Assuming Home is located in pages
 import Login from "./pages/Login"; // Adjusted path for Login
 import Register from "./pages/Register"; // Adjusted path for Register
 import { Toaster } from "react-hot-toast"; // Toaster for notifications
-import { initialState, reducer } from "./Navbar/reducer/UseReducer"; // Adjusted path for reducer
+import Girls from "./pages/Girls";
 import VerifyEmail from "./pages/VerifyEmail"
 import Footer from "./pages/Footer";
+import Boys from "./pages/Boys";
+import History from "./pages/History";
+import Coaches from "./pages/Coaches";
+import Achievement from "./pages/Achievment";
+import Vision from "./pages/Vision";
+import Location from "./pages/Location";
+import Support from "./pages/Support";
 // Create UserContext
 export const UserContext = createContext();
 
@@ -15,22 +22,30 @@ export const UserContext = createContext();
 //import { Verify } from "crypto";
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+ 
 
   return (
     
-    <UserContext.Provider value={{ state, dispatch }}>
+    <>
       <Navbar /> {/* Always show the Navbar */}
       <Routes>
         <Route path="/" element={ <Home/> } />
         <Route path="/login" element={ <Login />} />
         <Route path="/register" element={ <Register/> } />
         <Route path="/verify" element={ <VerifyEmail/> } />
+        <Route path="/Boys" element={ <Boys/> } />
+        <Route path="/Girls" element={ <Girls/> } />
+        <Route path="/Coaches" element={ <Coaches/> } />
+        <Route path="/History" element={ <History/> } />
+        <Route path="/Achievement" element={ <Achievement/> } />
+        <Route path="/Vision" element={ <Vision/> } />
+        <Route path="/Location" element={ <Location/> } />
+        <Route path="/Support" element={ <Support/> } />
       </Routes>
       <Footer/>  
       <Toaster position="bottom-right" reverseOrder={false} />
       
-    </UserContext.Provider>
+      </>
   );
 };
 
