@@ -4,7 +4,11 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+<<<<<<< HEAD
     "@react-oauth/google": "^0.12.1",
+=======
+    "@heroicons/react": "^1.0.6",
+>>>>>>> 50fc9a851a4199641e71b9774a115ac886d0f8e9
     "@reduxjs/toolkit": "^2.2.8",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

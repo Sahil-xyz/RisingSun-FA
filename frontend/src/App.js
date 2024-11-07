@@ -9,6 +9,18 @@ import { Toaster } from "react-hot-toast"; // Toaster for notifications
 import VerifyEmail from "./pages/VerifyEmail"
 import Footer from "./pages/Footer";
 import Profile from "./pages/Profile";
+import Girls from "./pages/Girls";
+import VerifyEmail from "./pages/VerifyEmail"
+import Footer from "./pages/Footer";
+import Boys from "./pages/Boys";
+import History from "./pages/History";
+import Coaches from "./pages/Coaches";
+import Achievement from "./pages/Achievment";
+import Vision from "./pages/Vision";
+import Location from "./pages/Location";
+import Support from "./pages/Support";
+// Create UserContext
+export const UserContext = createContext();
 
 // Main App component
 //import { Verify } from "crypto";
@@ -24,9 +36,18 @@ const App = () => {
         <Route path="/verify" element={ <VerifyEmail/> } />
         <Route path="/logout" element={ <Logout/> } />
         <Route path="/profile" element={ <Profile/> } />
+        <Route path="/Boys" element={ <Boys/> } />
+        <Route path="/Girls" element={ <Girls/> } />
+        <Route path="/Coaches" element={ <Coaches/> } />
+        <Route path="/History" element={ <History/> } />
+        <Route path="/Achievement" element={ <Achievement/> } />
+        <Route path="/Vision" element={ <Vision/> } />
+        <Route path="/Location" element={ <Location/> } />
+        <Route path="/Support" element={ <Support/> } />
       </Routes>
       <Footer/>  
       <Toaster position="bottom-right" reverseOrder={false} />
+      
       </>
   );
 };
