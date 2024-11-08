@@ -1,46 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const AdmissionsPage = () => {
   const [admissions, setAdmissions] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredAdmissions, setFilteredAdmissions] = useState([]);
   const [newAdmission, setNewAdmission] = useState({
     name: '',
     dateOfBirth: '',
-    gender: 'male',
+    gender: 'Male',
     role: 'Striker',
     mode: 'Offline',
   });
-  const [editingAdmission, setEditingAdmission] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Fetch admissions
+  // Fetch admissions from the backend
   const fetchAdmissions = async () => {
     try {
-      const response = await axios.get('/api/admissions');
-      setAdmissions(response.data.admissions);
+      const token = localStorage.getItem('token');
+      if (!token) {
+        toast.error("Authentication required");
+        return;
+      }
+
+      const response = await axios.get('http://localhost:8000/api/v1/admin/admission', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setAdmissions(response.data.admissionUsers); // Assuming response contains admissionUsers
+      setFilteredAdmissions(response.data.admissionUsers.slice(0, 5)); // Show first 5 by default
     } catch (error) {
       console.error('Error fetching admissions:', error);
+      toast.error("Failed to fetch admissions");
     }
   };
 
-  useEffect(() => {
-    fetchAdmissions();
-  }, []);
-
-  // Search admissions
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
+  // Filter the admissions based on the search query
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    const filtered = admissions.filter(admission =>
+      admission.name.toLowerCase().includes(query.toLowerCase()) || 
+      admission.role.toLowerCase().includes(query.toLowerCase()) || 
+      admission.mode.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredAdmissions(filtered.slice(0, 5)); // Show only top 5 results
   };
-
-  const filteredAdmissions = admissions.filter(admission =>
-    admission.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   // Add new admission
   const handleAddAdmission = async () => {
     try {
-      const response = await axios.post('/api/admissions', newAdmission);
-      setAdmissions([...admissions, response.data.admission]);
+      const token = localStorage.getItem('token');
+      if (!token) {
+        toast.error("Authentication required");
+        return;
+      }
+
+      const response = await axios.post('http://localhost:8000/api/v1/admin/admission', newAdmission, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setAdmissions(prevAdmissions => [...prevAdmissions, response.data.admission]);
       setNewAdmission({
         name: '',
         dateOfBirth: '',
@@ -48,39 +71,19 @@ const AdmissionsPage = () => {
         role: 'Striker',
         mode: 'Offline',
       });
+      toast.success("Admission added successfully");
     } catch (error) {
       console.error('Error adding admission:', error);
+      toast.error("Failed to add admission");
     }
   };
 
-  // Update admission
-  const handleUpdateAdmission = async (id) => {
-    try {
-      const response = await axios.put(`/api/admissions/${id}`, editingAdmission);
-      setAdmissions(admissions.map(admission =>
-        admission._id === id ? response.data.admission : admission
-      ));
-      setEditingAdmission(null);
-    } catch (error) {
-      console.error('Error updating admission:', error);
-    }
-  };
+  useEffect(() => {
+    fetchAdmissions();
+  }, []);
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Admissions Management</h1>
-
-      {/* Search Admissions */}
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Search admissions by name"
-          value={searchQuery}
-          onChange={handleSearch}
-          className="border p-2 rounded w-full"
-        />
-      </div>
-
       {/* Add New Admission */}
       <div className="mb-4">
         <h2 className="text-xl font-semibold mb-2">Add New Admission</h2>
@@ -103,8 +106,8 @@ const AdmissionsPage = () => {
           onChange={(e) => setNewAdmission({ ...newAdmission, gender: e.target.value })}
           className="border p-2 rounded mb-2 w-full"
         >
-          <option value="male">Male</option>
-          <option value="female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
         </select>
         <select
           value={newAdmission.role}
@@ -129,46 +132,33 @@ const AdmissionsPage = () => {
         </button>
       </div>
 
-      {/* List of Admissions */}
-      <div>
-        <h2 className="text-xl font-semibold mb-2">Admissions List</h2>
+      {/* Search Bar */}
+      <div className="mb-4">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => handleSearch(e.target.value)}
+          placeholder="Search admissions..."
+          className="border p-2 rounded mb-4 w-full"
+        />
+      </div>
+
+      {/* Display Admissions */}
+      <div className="mb-4">
+        <h3 className="text-xl font-semibold mb-2">Admissions List</h3>
         <ul>
-          {filteredAdmissions.map((admission) => (
-            <li key={admission._id} className="border p-2 rounded mb-2">
-              {editingAdmission && editingAdmission._id === admission._id ? (
-                <div>
-                  <input
-                    type="text"
-                    value={editingAdmission.name}
-                    onChange={(e) =>
-                      setEditingAdmission({ ...editingAdmission, name: e.target.value })
-                    }
-                    className="border p-2 rounded mb-2 w-full"
-                  />
-                  <button
-                    onClick={() => handleUpdateAdmission(admission._id)}
-                    className="bg-green-500 text-white p-2 rounded"
-                  >
-                    Save
-                  </button>
-                </div>
-              ) : (
-                <div>
-                  <p><strong>Name:</strong> {admission.name}</p>
-                  <p><strong>Date of Birth:</strong> {new Date(admission.dateOfBirth).toLocaleDateString()}</p>
-                  <p><strong>Gender:</strong> {admission.gender}</p>
-                  <p><strong>Role:</strong> {admission.role}</p>
-                  <p><strong>Mode:</strong> {admission.mode}</p>
-                  <button
-                    onClick={() => setEditingAdmission(admission)}
-                    className="bg-yellow-500 text-white p-2 rounded mt-2"
-                  >
-                    Edit
-                  </button>
-                </div>
-              )}
-            </li>
-          ))}
+          {filteredAdmissions.length > 0 ? (
+            filteredAdmissions.map((admission, index) => (
+              <li key={index} className="mb-2 p-2 border-b">
+                <p><strong>Name:</strong> {admission.name}</p>
+                <p><strong>Gender:</strong> {admission.gender}</p>
+                <p><strong>Role:</strong> {admission.role}</p>
+                <p><strong>Mode:</strong> {admission.mode}</p>
+              </li>
+            ))
+          ) : (
+            <p>No results found</p>
+          )}
         </ul>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import AdminSidebar from "./AdminSidebar";
 import AdminTeams from "./AdminTeams";
 import AdminDashboard from "./AdminDashboard";
@@ -25,8 +26,10 @@ const Admin = () => {
           <Route path="/teams" element={<AdminTeams />} />
           <Route path="/admission" element={<AdmissionPage />} />
         </Routes>
+        <Toaster position="bottom-right" reverseOrder={false} />
       </div>
     </div>
+    
   // ) : (
   //   <ErrorPage />
   // );
