@@ -16,11 +16,11 @@ const Admin = () => {
   // return isAdmin ? (
     <div className="flex">
       {/* Sidebar */}
-      <div className="w-64 h-screen fixed bg-gray-800">
+      <div className="h-screen bg-gray-800">
         <AdminSidebar />
       </div>
       {/* Main content */}
-      <div className="ml-64 flex-1 p-8">
+      <div className="md:ml-64 p-8">
         <Routes>
           <Route path="/" element={<AdminDashboard />} />
           <Route path="/teams" element={<AdminTeams />} />
