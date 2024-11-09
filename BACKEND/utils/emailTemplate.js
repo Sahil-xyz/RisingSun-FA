@@ -171,3 +171,86 @@ export const Welcome_Email_Template = `
   </body>
   </html>
 `;
+
+export const Forgot_Password_Email_Template = `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Reset Your Password</title>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              background-color: #f4f4f4;
+              color: #333;
+          }
+          .container {
+              max-width: 600px;
+              margin: 30px auto;
+              background: #ffffff;
+              border-radius: 8px;
+              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+              overflow: hidden;
+              border: 1px solid #ddd;
+          }
+          .header {
+              background-color: #FF5722;
+              color: white;
+              padding: 20px;
+              text-align: center;
+              font-size: 26px;
+              font-weight: bold;
+          }
+          .content {
+              padding: 25px;
+              line-height: 1.8;
+          }
+          .reset-link {
+              display: inline-block;
+              padding: 12px 25px;
+              margin: 20px 0;
+              background-color: #FF5722;
+              color: white;
+              text-decoration: none;
+              border-radius: 5px;
+              text-align: center;
+              font-size: 16px;
+              font-weight: bold;
+              transition: background-color 0.3s;
+          }
+          .reset-link:hover {
+              background-color: #E64A19;
+          }
+          .footer {
+              background-color: #f4f4f4;
+              padding: 15px;
+              text-align: center;
+              color: #777;
+              font-size: 12px;
+              border-top: 1px solid #ddd;
+          }
+          p {
+              margin: 0 0 15px;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+          <div class="header">Reset Your Password</div>
+          <div class="content">
+              <p>Hello,</p>
+              <p>We received a request to reset your password. Click the link below to set up a new password:</p>
+              <a href="{{resetLink}}" class="reset-link">Reset Password</a>
+              <p>If you did not request a password reset, please ignore this email or contact our support team if you have any concerns.</p>
+              <p>For security reasons, this link will expire in 24 hours.</p>
+          </div>
+          <div class="footer">
+              <p>&copy; ${new Date().getFullYear()} Rising-Sun Football Academy. All rights reserved.</p>
+          </div>
+      </div>
+  </body>
+  </html>
+`;

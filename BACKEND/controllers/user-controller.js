@@ -1,9 +1,9 @@
 import bcrypt from "bcryptjs"
 import crypto from "crypto";
 import { User } from "../models/user-model.js";
-import { sendVerificationCode, sendWelcomeEmail } from "../utils/email.js";
+import { sendVerificationCode, sendWelcomeEmail, sendForgotPasswordEmail } from "../utils/email.js";
 import { generateTokenAndSetCookies } from "../utils/generateEmailcode.js";
-// import { sendEmail } from '../utils/sendEmail.js';
+import jwt from 'jsonwebtoken'
 
 
 export const home = async (req, res) => {
@@ -11,7 +11,7 @@ export const home = async (req, res) => {
     res
       .status(200)
       .send(
-        "Welcome to world best mern series by thapa technical using router "
+        "Welcome"
       );
   } catch (error) {
     console.log(error);
@@ -229,75 +229,57 @@ export const updateProfile = async (req, res) => {
   }
 }
 
-// Forget Password
-export const forgotPassword = async (req, res, next) => {
-  try {
-    const { email } = req.body;
-    const user = await User.findOne({ email });
-    if(!user) {
-      res.status(500).json({
-        message: "Email Not Found",
-        success: false,
-      })
+// Forgot Password
+export const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+    try {
+        // Check if user exists
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Generate a JWT token for password reset
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+            expiresIn: '1h', // Token expires in 1 hour
+        });
+
+        // Create a password reset link
+        const resetLink = `${process.env.FRONTEND_URL}/reset-password/${token}`;
+
+        // Send email
+        await sendForgotPasswordEmail(email, resetLink);
+
+        res.status(200).json({ message: 'Password reset link sent to your email' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error sending reset link' });
+        console.log(error)
     }
-    // Generate token here...
-    const resetToken = await user.getResetToken();
-    await user.save();
-
-    // Integrate with frontend URL
-    const url = `${process.env.FRONTEND_URL}/resetPassword/${resetToken}`;
-    const message = `Click on the link to reset your password. ${url}. if you have not requested then please ignore.`
-
-    // Send token via email
-    await sendEmail(user.email, "Football Academy Reset Password", message)
-
-    res.status(200).json({
-      message: `Reset token sent to your ${user.email}`,
-      success: true
-    })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      message: "Failed to Update Password.",
-      success: false,
-    })
-  }
-}
+};
 
 // Reset Password
-export const resetPassword = async(req, res, next) => {
-  try {
-    const { token } = req.params;
-    const resetPasswordToken = crypto.createHash("sha256").update(token).digest("hex");
-    const user = await User.findOne({
-      resetPasswordToken,
-      resetPasswordTokenExpire: { $gt: Date.now() }
-    })
+export const resetPassword = async (req, res) => {
+  const { token } = req.params;
+    const { newPassword } = req.body;
 
-    if(!user) {
-      console.log(resetPasswordToken)
-      return res.status(400).json({
-        message: "Invalid token or expired token",
-        success: false
-      })
+    try {
+        // Verify the token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const userId = decoded.userId;
+
+        // Find the user and update password
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Hash the new password
+        user.password = newPassword;
+        await user.save();
+
+        res.status(200).json({ message: 'Password reset successful' });
+    } catch (error) {
+        res.status(400).json({ message: 'Invalid or expired token' });
     }
-    // Reset password here...
-    const newPassword = await bcrypt.hash(req.body.password, 10);
-    user.password = newPassword;
-    user.resetPasswordToken = undefined;
-    user.resetPasswordTokenExpire = undefined;
-    await user.save();
-
-    res.status(200).json({
-      message: "Password changed successfully",
-      success: true,
-      token
-    }) 
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      message: "Failed to Update Password.",
-      success: false,
-    })
-  }
-}
+};

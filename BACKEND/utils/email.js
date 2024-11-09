@@ -1,4 +1,4 @@
-import { Verification_Email_Template, Welcome_Email_Template } from './emailTemplate.js';
+import { Verification_Email_Template, Welcome_Email_Template, Forgot_Password_Email_Template } from './emailTemplate.js';
 import { transporter } from './sendEmail.js'
 
 export const sendVerificationCode = async(email, verificationCode) => {
@@ -33,3 +33,18 @@ export const sendWelcomeEmail=async(email,name)=>{
         console.log('Email error',error)
     }
 }
+
+export const sendForgotPasswordEmail = async (email, resetLink) => {
+    try {
+        const response = await transporter.sendMail({
+            from: '"Rising-Sun Football Academy" <risingsunfa18@gmail.com>',
+            to: email,
+            subject: "Reset Your Password",
+            text: "Reset your password",
+            html: Forgot_Password_Email_Template.replace("{{resetLink}}", resetLink),
+        });
+        console.log("Forgot password email sent successfully", response);
+    } catch (error) {
+        console.log("Error sending forgot password email", error);
+    }
+};

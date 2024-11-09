@@ -25,8 +25,8 @@ router.route("/verifyEmail").post(verifyEmail); // Email verification
 router.route("/login").post(validate(loginSchema), login); // User login
 router.route("/logout").post(logout); // Logout user
 router.route("/me").get(authMiddleware, getMyProfile); // Get logged-in user's profile
-router.route("/updateProfile").put(authMiddleware, updateProfile); // Update user's profile
-router.route("/forgotPassword").post(forgotPassword); // Forgot password
-router.route("/resetPassword/:token").put(resetPassword); // Reset password with token
+router.route("/update-profile").put(authMiddleware, updateProfile); // Update user's profile
+router.route("/forgot-password").post(forgotPassword); // Forgot password
+router.route("/reset-password/:token").put(resetPassword); // Reset password with token
 
 export default router;

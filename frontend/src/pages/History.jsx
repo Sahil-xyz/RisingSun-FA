@@ -1,92 +1,104 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
+import { FaMapMarkerAlt, FaTrophy, FaLightbulb, FaHandshake } from "react-icons/fa";
+import Footer from "../pages/Footer";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import "react-vertical-timeline-component/style.min.css";
+
+import history from "../assets/history.png"; 
 
 const History = () => {
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-8">
-      <div className="container mx-auto space-y-8">
-        
-        {/* Hero Section */}
-        <section className="text-center">
-          <h1 className="text-5xl font-bold mb-4 text-yellow-400">Our Journey</h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Discover the story of our football academy, from humble beginnings to producing world-class players. Our commitment to excellence defines us.
+    <div className="font-pop bg-[#010B13] text-white min-h-screen p-6">
+      <header className="py-4">
+      {/* <Link to="/" className="flex items-center text-yellow-400 hover:underline">
+          <FaArrowLeft className="mr-2" /> Back to Home
+        </Link> */}
+      <img src={history} alt="Academy Team" className="w-full h-64.5 object-cover" />
+      <h1 className="text-4xl font-bold mt-4">History</h1>
+      </header>
+      <main>
+        <section className="py-6">
+          <h2 className="text-2xl font-semibold">Our Journey</h2>
+          <p className="mt-4">
+            Founded in 2010, Rising Sun Football Academy began with a vision to create a nurturing environment for young football enthusiasts. Over the years, we have grown into a leading football academy, known for our top-tier training programs and successful teams.
+          </p>
+          <p className="mt-4">
+            Our commitment to excellence and the development of our players has led to numerous achievements and a growing community of dedicated athletes. From local tournaments to national championships, our academy has been a beacon of football talent and sportsmanship.
           </p>
         </section>
-
-        {/* Timeline Section */}
-        <section className="space-y-8">
-          <h2 className="text-4xl font-semibold text-yellow-400">Academy Milestones</h2>
-          <div className="border-l-4 border-yellow-400 ml-8 space-y-12">
-            <div className="relative pl-8">
-              <span className="absolute -left-5 h-4 w-4 bg-yellow-400 rounded-full top-2"></span>
-              <h3 className="text-2xl font-bold text-yellow-300">Established in 2005</h3>
-              <p className="text-gray-400">
-                Our academy was founded with a mission to nurture young talent and instill the spirit of teamwork and sportsmanship.
-              </p>
-            </div>
-            <div className="relative pl-8">
-              <span className="absolute -left-5 h-4 w-4 bg-yellow-400 rounded-full top-2"></span>
-              <h3 className="text-2xl font-bold text-yellow-300">First Championship Victory - 2010</h3>
-              <p className="text-gray-400">
-                Our first major victory was a turning point, putting us on the map and inspiring young athletes to dream big.
-              </p>
-            </div>
-            <div className="relative pl-8">
-              <span className="absolute -left-5 h-4 w-4 bg-yellow-400 rounded-full top-2"></span>
-              <h3 className="text-2xl font-bold text-yellow-300">International Recognition - 2018</h3>
-              <p className="text-gray-400">
-                With players joining top leagues globally, our academy became a recognized name internationally.
-              </p>
-            </div>
-          </div>
+        <section className="py-6">
+          <h2 className="text-2xl font-semibold">Milestones</h2>
+          <VerticalTimeline>
+            <VerticalTimelineElement
+              className="vertical-timeline-element--work"
+              contentStyle={{ background: "#333", color: "#fff" }}
+              contentArrowStyle={{ borderRight: "7px solid  #333" }}
+              date="2010"
+              iconStyle={{ background: "yellow", color: "#333" }}
+              icon={<FaMapMarkerAlt />}
+            >
+              <h3 className="vertical-timeline-element-title">Academy Founded</h3>
+              <p>Rising Sun Football Academy was established.</p>
+            </VerticalTimelineElement>
+            <VerticalTimelineElement
+              className="vertical-timeline-element--work"
+              contentStyle={{ background: "#333", color: "#fff" }}
+              contentArrowStyle={{ borderRight: "7px solid  #333" }}
+              date="2012"
+              iconStyle={{ background: "yellow", color: "#333" }}
+              icon={<FaTrophy />}
+            >
+              <h3 className="vertical-timeline-element-title">
+                First Major Championship Win
+              </h3>
+              <p>Our academy secured its first major championship victory.</p>
+            </VerticalTimelineElement>
+            <VerticalTimelineElement
+              className="vertical-timeline-element--work"
+              contentStyle={{ background: "#333", color: "#fff" }}
+              contentArrowStyle={{ borderRight: "7px solid  #333" }}
+              date="2015"
+              iconStyle={{ background: "yellow", color: "#333" }}
+              icon={<FaLightbulb />}
+            >
+              <h3 className="vertical-timeline-element-title">
+                Expansion to Multiple Locations
+              </h3>
+              <p>We expanded our academy to multiple locations.</p>
+            </VerticalTimelineElement>
+            <VerticalTimelineElement
+              className="vertical-timeline-element--work"
+              contentStyle={{ background: "#333", color: "#fff" }}
+              contentArrowStyle={{ borderRight: "7px solid  #333" }}
+              date="2018"
+              iconStyle={{ background: "yellow", color: "#333" }}
+              icon={<FaHandshake />}
+            >
+              <h3 className="vertical-timeline-element-title">
+                Partnership with International Coaches
+              </h3>
+              <p>We partnered with international coaches to enhance training.</p>
+            </VerticalTimelineElement>
+            <VerticalTimelineElement
+              className="vertical-timeline-element--work"
+              contentStyle={{ background: "#333", color: "#fff" }}
+              contentArrowStyle={{ borderRight: "7px solid  #333" }}
+              date="2020"
+              iconStyle={{ background: "yellow", color: "#333" }}
+              icon={<FaLightbulb />}
+            >
+              <h3 className="vertical-timeline-element-title">
+                Launch of Advanced Training Programs
+              </h3>
+              <p>Our academy launched advanced training programs.</p>
+            </VerticalTimelineElement>
+          </VerticalTimeline>
         </section>
-
-        {/* Image Gallery Section */}
-        <section className="space-y-8">
-          <h2 className="text-4xl font-semibold text-yellow-400">Academy Moments</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
-              <img src="https://sesafootballacademy.in/wp-content/uploads/2022/01/img7-3.jpg" alt="Team Photo" className="w-full h-64 object-cover" />
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
-              <img src="https://sesafootballacademy.in/wp-content/uploads/2022/01/img2-3.jpg" alt="Training Session" className="w-full h-64 object-cover" />
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
-              <img src="https://sesafootballacademy.in/wp-content/uploads/2022/01/cover-3.jpg" alt="Championship Trophy" className="w-full h-64 object-cover" />
-            </div>
-          </div>
-        </section>
-
-        {/* Video Section */}
-        <section className="space-y-8">
-          <h2 className="text-4xl font-semibold text-yellow-400">Our Journey Video</h2>
-          <div className="rounded-lg overflow-hidden shadow-lg">
-            <video controls className="w-full h-64 object-cover">
-              <source src="https://www.youtube.com/watch?v=l_uIR6JjCsA" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section className="space-y-8">
-          <h2 className="text-4xl font-semibold text-yellow-400">Player Testimonials</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-              <p className="text-lg text-gray-400 italic">
-                "The training and guidance I received here shaped me not just as a player, but as a person. Forever grateful!"
-              </p>
-              <h4 className="mt-4 font-semibold text-yellow-300">- Alex Doe</h4>
-            </div>
-            <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-              <p className="text-lg text-gray-400 italic">
-                "This academy gave me the skills and confidence to pursue my dreams. The coaches are truly dedicated."
-              </p>
-              <h4 className="mt-4 font-semibold text-yellow-300">- Jamie Smith</h4>
-            </div>
-          </div>
-        </section>
-      </div>
+      </main>
     </div>
   );
 };

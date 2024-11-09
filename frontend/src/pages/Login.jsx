@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import toast from "react-hot-toast";
-import { MdExitToApp } from "react-icons/md";
 // import { useGoogleLogin } from "@react-oauth/google";
+import loginImage from '../assets/loginImage-min.png'
 
 export const USER_API_END_POINT = "http://localhost:8000/api/v1/user/login";
 
@@ -72,15 +72,14 @@ const Login = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 bg-[url('https://sesafootballacademy.in/wp-content/themes/sfa-home/images/bag.jpg')] bg-cover bg-center">
-      <div className="flex flex-col items-center sm:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg p-8 sm:p-12 bg-[rgba(255,255,255,0.20)] backdrop-blur-lg justify-center">
+    <div className="flex items-center font-roboto justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: `url(${loginImage})` }}>
+      <div className="flex items-center sm:flex-row  md:w-3/4 bg-white bg-opacity-50 rounded-2xl border-2 border-white shadow-2xl p-8 sm:p-12 backdrop-blur-sm justify-center ml-12">
         
         <div className="w-full sm:w-1/2">
           <div className="flex justify-center items-center mb-8">
             <div className="text-3xl font-bold text-red-500">Rising Sun Football Academy</div>
           </div>
-          <h2 className="text-2xl font-bold mb-4">Login to Football Club</h2>
-          <p className="text-gray-500 mb-6">Please login or sign up to continue</p>
+          <h2 className="text-2xl font-bold mb-4 text-[#13293D] text-center">Login to Football Club</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -109,6 +108,9 @@ const Login = () => {
                 onChange={handleInput}
                 required
               />
+            </div>
+            <div className="mb-6">
+              <Link to="/forget-password" className="text-blue-400 hover:text-blue-600">Forgot Password?</Link>
             </div>
             <div className="mb-4">
               <button
@@ -143,6 +145,8 @@ const Login = () => {
           </p>
         </div>
       </div>
+      {/* <div className="w-full">
+      </div> */}
     </div>
   );
 };

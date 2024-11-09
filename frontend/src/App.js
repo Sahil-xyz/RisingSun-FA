@@ -17,6 +17,8 @@ import Achievement from "./pages/Achievment";
 import Vision from "./pages/Vision";
 import Location from "./pages/Location";
 import Support from "./pages/Support";
+import ForgotPasswordForm from "./pages/ForgotPasswordForm";
+import ResetPasswordForm from "./pages/ResetPasswordForm";
 
 // Main App component
 //import { Verify } from "crypto";
@@ -31,6 +33,8 @@ const App = () => {
         <Route path="/register" element={ <Register/> } />
         <Route path="/verify" element={ <VerifyEmail/> } />
         <Route path="/logout" element={ <Logout/> } />
+        <Route path="/forget-password" element={<ForgotPasswordForm/>} />
+        <Route path="/reset-password/:token" element={<ResetPasswordForm/>} />
         <Route path="/profile" element={ <Profile/> } />
         <Route path="/Boys" element={ <Boys/> } />
         <Route path="/Girls" element={ <Girls/> } />
