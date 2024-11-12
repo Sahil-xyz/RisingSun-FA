@@ -1,11 +1,12 @@
 // src/components/DisplayTeams.js
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const DisplayTeams = () => {
-  const [teams, setTeams] = useState([]);  // Initialize as an empty array
+  const [teams, setTeams] = useState([]); // Initialize as an empty array
   const [loading, setLoading] = useState(true);
   const [expandedTeamId, setExpandedTeamId] = useState(null); // Track expanded team
   const navigate = useNavigate();
@@ -13,22 +14,25 @@ const DisplayTeams = () => {
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         if (!token) {
           toast.error("Authentication required");
           return;
         }
 
-        const response = await axios.get('http://localhost:8000/api/v1/admin/teams/display', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "http://localhost:8000/api/v1/admin/teams",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-        setTeams(response.data.data || []);  // Access the correct data structure
+        setTeams(response.data.data || []); // Access the correct data structure
       } catch (error) {
-        console.error('Error fetching teams:', error);
-        toast.error('Failed to load teams.');
+        console.error("Error fetching teams:", error);
+        toast.error("Failed to load teams.");
       } finally {
         setLoading(false);
       }
@@ -57,8 +61,8 @@ const DisplayTeams = () => {
           {teams.map((team) => (
             <div key={team._id} className="border-b pb-4">
               {/* Team Name with click handler to toggle details */}
-              <h3 
-                className="text-lg font-bold cursor-pointer hover:underline" 
+              <h3
+                className="text-lg font-bold cursor-pointer hover:underline"
                 onClick={() => toggleTeamDetails(team._id)}
               >
                 {team.name}
@@ -67,17 +71,28 @@ const DisplayTeams = () => {
               {/* Conditionally display team details */}
               {expandedTeamId === team._id && (
                 <div className="mt-2 bg-gray-100 p-4 rounded shadow">
-                  <p><strong>Coach:</strong> {team.coach}</p>
-                  <p><strong>Formation:</strong> {team.formation}</p>
+                  <p>
+                    <strong>Coach:</strong> {team.coach}
+                  </p>
+                  <p>
+                    <strong>Formation:</strong> {team.formation}
+                  </p>
                   <div>
                     <h4 className="font-semibold">Achievements:</h4>
                     <ul className="list-disc list-inside">
                       {team.achievements && team.achievements.length > 0 ? (
                         team.achievements.map((achievement, i) => (
                           <li key={i} className="mt-1">
-                            <p><strong>Title:</strong> {achievement.title}</p>
-                            <p><strong>Year:</strong> {achievement.year}</p>
-                            <p><strong>Description:</strong> {achievement.description}</p>
+                            <p>
+                              <strong>Title:</strong> {achievement.title}
+                            </p>
+                            <p>
+                              <strong>Year:</strong> {achievement.year}
+                            </p>
+                            <p>
+                              <strong>Description:</strong>{" "}
+                              {achievement.description}
+                            </p>
                           </li>
                         ))
                       ) : (
@@ -86,7 +101,10 @@ const DisplayTeams = () => {
                     </ul>
                   </div>
                   <div className="mt-2">
-                    <p><strong>Display on Frontend:</strong> {team.display ? 'Yes' : 'No'}</p>
+                    <p>
+                      <strong>Display on Frontend:</strong>{" "}
+                      {team.display ? "Yes" : "No"}
+                    </p>
                   </div>
                   {/* Edit Button */}
                   <button
@@ -101,6 +119,14 @@ const DisplayTeams = () => {
           ))}
         </div>
       )}
+      <div className="flex justify-end m-4">
+        <Link
+          to="/admin/teams/create-team"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          New Team
+        </Link>
+      </div>
     </div>
   );
 };

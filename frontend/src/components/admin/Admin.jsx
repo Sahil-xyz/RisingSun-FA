@@ -26,10 +26,10 @@ const Admin = () => {
       <div className="md:ml-64 p-8">
         <Routes>
           <Route path="/" element={<AdminDashboard />} />
-          <Route path="/teams" element={<CreateTeam />} />
+          <Route path="/teams/create-team" element={<CreateTeam />} />
           <Route path="/admission" element={<AdmissionPage />} />
           <Route path="/teams/:id" element={<EditTeam/>} />
-          <Route path="/teams/display" element={<DisplayTeams/>} />
+          <Route path="/teams" element={<DisplayTeams/>} />
         </Routes>
         <Toaster position="bottom-right" reverseOrder={false} />
       </div>

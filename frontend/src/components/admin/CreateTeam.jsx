@@ -48,7 +48,7 @@ const CreateTeam = () => {
         return;
       }
 
-        const response = await axios.post('http://localhost:8000/api/v1/admin/teams', teamData, {
+        const response = await axios.post('http://localhost:8000/api/v1/admin/teams/create-team', teamData, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

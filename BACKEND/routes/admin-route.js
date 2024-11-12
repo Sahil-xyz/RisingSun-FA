@@ -15,8 +15,8 @@ router.route("/admission").get(authMiddleware, adminMiddleware, searchAdmissions
 router.route("/admission").get(authMiddleware, adminMiddleware, getAdmissionUsers)
 router.route("/admission/:id").put(authMiddleware,adminMiddleware, updateAdmission)
 router.route("/admission/:id").delete(authMiddleware,adminMiddleware, deleteAdmission)
-router.route("/teams").post(authMiddleware, adminMiddleware, createTeam)
-router.route("/teams/display").get(authMiddleware, adminMiddleware, getDisplayedTeams)
+router.route("/teams/create-team").post(authMiddleware, adminMiddleware, createTeam)
+router.route("/teams").get(authMiddleware, adminMiddleware, getDisplayedTeams)
 router.route("/teams/:id").put(authMiddleware, adminMiddleware, updateTeam)
 router.route("/teams/:id").get(authMiddleware, adminMiddleware, getTeamById);
 
