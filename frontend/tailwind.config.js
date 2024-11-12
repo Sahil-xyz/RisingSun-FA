@@ -8,6 +8,9 @@ module.exports = {
         poppins: ["Poppins", "system-ui"],
         ptsans: ["PT Sans", "system-ui"]
       },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite', 
+      },
     },
   },
   plugins: [],

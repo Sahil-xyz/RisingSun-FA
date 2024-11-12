@@ -10,7 +10,7 @@ const admissionSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        enum: ["male", "female"],
+        enum: ["Male", "Female"],
         required: true
     },
     role: {
@@ -18,6 +18,11 @@ const admissionSchema = new mongoose.Schema({
         required: true,
         enum: ['Striker', 'Defender', 'Midfielder', 'Goalkeeper'],
         default: 'Striker'
+    },
+    team: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Team',  // Reference to the Team model
+        required: false
     },
     mode: {
         type: String,

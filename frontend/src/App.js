@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./Navbar/Navbar"; // Adjusted path for Navbar
+import Navbar from "./components/Navbar/Navbar"; // Adjusted path for Navbar
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home"; // Assuming Home is located in pages
 import Login from "./pages/Login"; // Adjusted path for Login
@@ -19,6 +19,8 @@ import Location from "./pages/Location";
 import Support from "./pages/Support";
 import ForgotPasswordForm from "./pages/ForgotPasswordForm";
 import ResetPasswordForm from "./pages/ResetPasswordForm";
+import DonatePage from "./pages/DonatePage";
+import TeamList from "./pages/TeamList";
 
 // Main App component
 //import { Verify } from "crypto";
@@ -44,6 +46,8 @@ const App = () => {
         <Route path="/Vision" element={ <Vision/> } />
         <Route path="/Location" element={ <Location/> } />
         <Route path="/Support" element={ <Support/> } />
+        <Route path="/donate" element={ <DonatePage/> } />
+        <Route path="/team-list" element={<TeamList/> } />
       </Routes>
       <Footer/>  
       <Toaster position="bottom-right" reverseOrder={false} />

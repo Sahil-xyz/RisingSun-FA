@@ -8,7 +8,9 @@ import {
   forgotPassword, 
   resetPassword, 
   home, 
-  verifyEmail 
+  verifyEmail, 
+  getTeams,
+  getTeamById
 } from '../controllers/user-controller.js';
 import authMiddleware from '../middlewares/auth-middleware.js';
 import signupSchema from "../validators/signup-validator.js";
@@ -28,5 +30,7 @@ router.route("/me").get(authMiddleware, getMyProfile); // Get logged-in user's p
 router.route("/update-profile").put(authMiddleware, updateProfile); // Update user's profile
 router.route("/forgot-password").post(forgotPassword); // Forgot password
 router.route("/reset-password/:token").put(resetPassword); // Reset password with token
+router.route("/team").get(getTeams);
+router.route("/team/:id").get(getTeamById)
 
 export default router;
