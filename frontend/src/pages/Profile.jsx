@@ -6,12 +6,13 @@ const Profile = () => {
   const { user } = useAuth(); 
   
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-center text-gray-700">Profile Information</h2>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Username</label>
-          <p className="bg-gray-200 p-2 rounded-md">{user?.username || "N/A"}</p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-gray-500 via-gray-600 to-gray-700">
+      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md transform transition-all duration-500 hover:scale-105">
+        <h2 className="text-3xl font-semibold mb-6 text-center text-gray-800">Profile Information</h2>
+        
+        <div className="mb-6">
+          <label className="block text-gray-800 font-semibold mb-2">Username</label>
+          <p className="bg-gray-200 text-gray-800 p-3 rounded-lg shadow-md">{user?.username || "N/A"}</p>
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">Email</label>
@@ -28,3 +29,8 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
+
+
+

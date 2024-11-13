@@ -23,6 +23,9 @@ import DonatePage from "./pages/DonatePage";
 // import TeamList from "./pages/TeamList";
 import BoysTeamList from "./pages/BoysTeamList";
 import GirlsTeamList from "./pages/GirlsTeamList";
+import TeamList from "./pages/TeamList";
+import Gallery from "./pages/Gallery";
+import BoysTeamList from "./pages/BoysTeamList";
 
 // Main App component
 //import { Verify } from "crypto";
@@ -52,6 +55,9 @@ const App = () => {
         <Route path="/donate" element={ <DonatePage/> } />
         <Route path="/boys" element={<BoysTeamList/> } />
         <Route path="/girls" element={<GirlsTeamList/> } />
+        <Route path="/team-list" element={<TeamList/> } />
+        <Route path="/Gallery" element={<Gallery/> } />
+        <Route path="/BoysTeamList" element={<BoysTeamList/> } />
       </Routes>
       </div>
       <Footer/>  
