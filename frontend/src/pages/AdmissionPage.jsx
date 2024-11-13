@@ -22,31 +22,46 @@ const AdmissionsPage = () => {
         toast.error("Authentication required");
         return;
       }
-
+  
       const response = await axios.get('http://localhost:8000/api/v1/admin/admission', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      setAdmissions(response.data.admissionUsers);
-      setFilteredAdmissions(response.data.admissionUsers.slice(0, 5));
+  
+      console.log('API response:', response);  // Log the response object
+  
+      if (Array.isArray(response.data)) {
+        setAdmissions(response.data);
+        setFilteredAdmissions(response.data.slice(0, 5));
+      } else if (response.data && response.data.data) {
+        // If the data is nested inside a 'data' key
+        setAdmissions(Array.isArray(response.data.data) ? response.data.data : []);
+        setFilteredAdmissions((Array.isArray(response.data.data) ? response.data.data : []).slice(0, 5));
+      } else {
+        setAdmissions([]);
+        setFilteredAdmissions([]);
+        console.error('Expected array but got:', response.data);
+      }
     } catch (error) {
       console.error('Error fetching admissions:', error);
       toast.error("Failed to fetch admissions");
     }
   };
 
-  const handleSearch = (query) => {
+  // Handle Search functionality
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
     setSearchQuery(query);
+
     const filtered = admissions.filter(admission =>
-      admission.name.toLowerCase().includes(query.toLowerCase()) || 
-      admission.role.toLowerCase().includes(query.toLowerCase()) || 
-      admission.mode.toLowerCase().includes(query.toLowerCase())
+      admission.name.toLowerCase().includes(query)
     );
-    setFilteredAdmissions(filtered.slice(0, 5));
+
+    setFilteredAdmissions(filtered.slice(0, 5)); // Show only top 5 matching results
   };
 
+  // Handle adding new admission
   const handleAddAdmission = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -62,6 +77,8 @@ const AdmissionsPage = () => {
       });
 
       setAdmissions(prevAdmissions => [...prevAdmissions, response.data.admission]);
+      setFilteredAdmissions(prevAdmissions => [...prevAdmissions, response.data.admission].slice(0, 5));
+
       setNewAdmission({
         name: '',
         dateOfBirth: '',
@@ -69,11 +86,44 @@ const AdmissionsPage = () => {
         role: 'Striker',
         mode: 'Offline',
       });
+
       toast.success("Admission added successfully");
     } catch (error) {
       console.error('Error adding admission:', error);
       toast.error("Failed to add admission");
     }
+  };
+
+  // Handle deleting an admission
+  const handleDeleteAdmission = async (id) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        toast.error("Authentication required");
+        return;
+      }
+
+      const response = await axios.delete(`http://localhost:8000/api/v1/admin/admission/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setAdmissions(admissions.filter(admission => admission._id !== id));
+      setFilteredAdmissions(filteredAdmissions.filter(admission => admission._id !== id));
+
+      toast.success("Admission deleted successfully");
+    } catch (error) {
+      console.error('Error deleting admission:', error);
+      toast.error("Failed to delete admission");
+    }
+  };
+
+  // Handle editing an admission (for now just log the admission)
+  const handleEditAdmission = (id) => {
+    const admissionToEdit = admissions.find(admission => admission._id === id);
+    console.log('Editing Admission:', admissionToEdit);
+    // You can implement the edit logic as required (e.g., show a modal to update the details)
   };
 
   useEffect(() => {
@@ -140,7 +190,7 @@ const AdmissionsPage = () => {
         <input
           type="text"
           value={searchQuery}
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={handleSearch}
           placeholder="Search admissions..."
           className="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400"
         />
@@ -157,6 +207,20 @@ const AdmissionsPage = () => {
                 <p className="text-md text-gray-300"><strong>Gender:</strong> {admission.gender}</p>
                 <p className="text-md text-gray-300"><strong>Role:</strong> {admission.role}</p>
                 <p className="text-md text-gray-300"><strong>Mode:</strong> {admission.mode}</p>
+                <div className="flex justify-between mt-4">
+                  <button
+                    onClick={() => handleEditAdmission(admission._id)}
+                    className="bg-yellow-600 hover:bg-yellow-500 p-2 rounded-lg text-white font-semibold transition duration-300 ease-in-out"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDeleteAdmission(admission._id)}
+                    className="bg-red-600 hover:bg-red-500 p-2 rounded-lg text-white font-semibold transition duration-300 ease-in-out"
+                  >
+                    Delete
+                  </button>
+                </div>
               </li>
             ))
           ) : (
@@ -169,9 +233,3 @@ const AdmissionsPage = () => {
 };
 
 export default AdmissionsPage;
-
-
-
-
-
-

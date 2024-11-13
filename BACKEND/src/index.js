@@ -6,6 +6,7 @@ import connectDB from '../utils/db.js'
 import userRoute from '../routes/user-routes.js'
 import adminRoute from '../routes/admin-route.js'
 import errorMiddleware from '../middlewares/error-middleware.js'
+import paymentRoute from '../routes/payment.route.js';
 
 dotenv.config();
 
@@ -29,6 +30,9 @@ app.use("/api/v1/user", userRoute);
 
 // Admin api routes
 app.use("/api/v1/admin",adminRoute);
+
+// Payment gateway routes
+app.use("/api/v1/payment", paymentRoute);
 
 app.use(errorMiddleware);
 

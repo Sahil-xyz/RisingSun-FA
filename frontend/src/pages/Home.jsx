@@ -8,25 +8,30 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../store/auth';
 import AOS from 'aos';
 import BenefitCard from '../components/BenefitCard';
+import coachImg from '../assets/undraw_teaching_re_g7e3(1).svg'
+import oppurnityImg from '../assets/undraw_junior_soccer_6sop(1).svg'
+import supportImg from '../assets/undraw_fans_re_cri3(1).svg'
+import facilityImg from '../assets/undraw_goal_-0-v5v(1).svg'
+
 
 const benefits = [
   {
-    // image: coachImg,
+    image: coachImg,
     title: 'Elite Coaching',
     description: 'Learn from the best! Our coaches are seasoned professionals dedicated to bringing out the champion in you.',
   },
   {
-    // image: facilityImg,
+    image: facilityImg,
     title: 'State-of-the-Art Facilities',
     description: 'Train in top-notch facilities with the latest equipment and resources.',
   },
   {
-    // image: supportImg,
+    image: supportImg,
     title: 'Community and Support',
     description: 'Be part of a community that supports and uplifts each other, both on and off the field.',
   },
   {
-    // image: oppurnityImg,
+    image: oppurnityImg,
     title: 'Oppurtunity',
     description: 'Get a chance to experience exciting tournaments alongside our dedicated and talented football team.',
   },
@@ -69,10 +74,11 @@ const Home = () => {
           )
         }
       </div>
+      {/* Section 2 - Club Benefit Cards*/}
       <div className="bg-slate-50 font-pop text-black">
       <div className="w-full pl-8 pt-12 pb-20 md:w-[750px] md:pl-32 md:pt-24">
         <div>
-          <p className="relative text-2xl font-bold text-[#52b429] before:mr-6 before:inline-block before:h-12 before:w-2 before:bg-[#52b429] before:align-middle before:content-['']">
+          <p className="relative font-poppins text-2xl font-bold text-[#52b429] before:mr-6 before:inline-block before:h-12 before:w-2 before:bg-[#52b429] before:align-middle before:content-['']">
             WHY TO CHOOSE US?
           </p>
           <h2 className="pb-4 pt-8 text-lg sm:text-xl md:text-2xl font-sans">
@@ -92,6 +98,7 @@ const Home = () => {
         ))}
       </div>
     </div>
+    {/* Section 3 - Our Academy*/}
       <div className="flex flex-col lg:flex-row justify-center items-center py-10 bg-white">
   <div className="flex flex-col lg:flex-row w-11/12 bg-white shadow-md rounded-lg overflow-hidden">
     {/* Left Side Image and Stats */}
@@ -194,7 +201,9 @@ const Home = () => {
 
 <div className="bg-white py-10 flex flex-col items-center">
       {/* Gallery Heading */}
-      <h1 className="text-4xl font-bold text-blue-700 mb-8">Gallery</h1>
+      <p className="underline-offset-2 font-poppins relative text-2xl mb-8 font-bold text-[#52b429] before:mr-6 before:inline-block before:h-12 before:w-2 before:bg-[#52b429] before:align-middle before:content-['']">
+            GALLERY
+          </p>
 
       {/* Gallery Items */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 max-w-7xl w-full px-4">

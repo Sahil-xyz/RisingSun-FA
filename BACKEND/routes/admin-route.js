@@ -12,7 +12,7 @@ router.route("/users").get(authMiddleware,adminMiddleware, getAllUsers);
 // Admission Routes in Admin
 router.route("/admission").post(authMiddleware,adminMiddleware, createAdmission)
 router.route("/admission").get(authMiddleware, adminMiddleware, searchAdmissions)
-router.route("/admission").get(authMiddleware, adminMiddleware, getAdmissionUsers)
+// router.route("/admission").get(authMiddleware, adminMiddleware, getAdmissionUsers)
 router.route("/admission/:id").put(authMiddleware,adminMiddleware, updateAdmission)
 router.route("/admission/:id").delete(authMiddleware,adminMiddleware, deleteAdmission)
 router.route("/teams/create-team").post(authMiddleware, adminMiddleware, createTeam)
