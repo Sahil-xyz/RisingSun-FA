@@ -29,13 +29,13 @@ const FlyoutLink = ({ children, href, FlyoutContent }) => {
             exit={{ opacity: 0, y: 15 }}
             style={{ x: "-50%" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="absolute left-1/2 top-12 bg-slate-200 border-2 border-slate-900 text-black rounded-lg z-50 shadow-lg p-4"
+            className="absolute left-1/2 top-12 bg-slate-200 border-2 border-slate-400 text-black rounded-lg z-50 shadow-lg p-4"
           >
             {/* Transparent overlay for spacing */}
             <div className="absolute -top-6 left-0 right-0 h-6 bg-transparent" />
 
             {/* Small arrow pointing upwards */}
-            <div className="absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-slate-200 border-slate-900 border-l-2 border-t-2" />
+            <div className="absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-slate-200 border-slate-400 border-l-2 border-t-2" />
 
             {/* The actual content inside the dropdown */}
             <FlyoutContent />

@@ -47,23 +47,23 @@ const Navbar = () => {
           ) : (
             <Link to="/home" className="text-sm md:text-base">Home</Link>
           )}
-          <FlyoutLink href="#" FlyoutContent={AboutContent} className="text-sm md:text-base">About</FlyoutLink>
-          <FlyoutLink href="#" FlyoutContent={TeamContent} className="text-sm md:text-base">Team</FlyoutLink>
-          <FlyoutLink href="#" FlyoutContent={JoinusContent} className="text-sm md:text-base">Join Us</FlyoutLink>
-          <FlyoutLink href="#" FlyoutContent={ContactContent} className="text-sm md:text-base">Contact</FlyoutLink>
+          <FlyoutLink  FlyoutContent={AboutContent} className="text-sm md:text-base">  <Link to="/">About</Link></FlyoutLink>
+          <FlyoutLink  FlyoutContent={TeamContent} className="text-sm md:text-base">   <Link to="/">Team</Link></FlyoutLink>
+          <FlyoutLink  FlyoutContent={JoinusContent} className="text-sm md:text-base"> <Link to="/">Join Us</Link></FlyoutLink>
+          <FlyoutLink  FlyoutContent={ContactContent} className="text-sm md:text-base"><Link to="/">Contact</Link></FlyoutLink>
         </div>
 
         {/* Desktop Login Button */}
         <div className="hidden md:block">
           {isLoggedIn ? (
             <Link to="/profile">
-              <button className="rounded-sm bg-[#FFD700] px-4 py-2 text-sm md:px-6 md:py-2 font-semibold text-black hover:bg-[#B5D53E]">
+              <button className="rounded-full bg-slate-400 px-4 py-2 text-sm md:px-6 md:py-2 font-semibold text-black hover:bg-slate-300">
                 Profile
               </button>
             </Link>
           ) : (
             <Link to="/login">
-              <button className="rounded-sm bg-[#FFD700] px-4 py-2 text-sm md:px-6 md:py-2 font-semibold text-black hover:bg-[#B5D53E]">
+              <button className="rounded-sm bg-slate-500 px-4 py-2 text-sm md:px-6 md:py-2 font-semibold text-black hover:bg-slate-400">
                 Login
               </button>
             </Link>
@@ -105,9 +105,9 @@ const Navbar = () => {
   </button>
   {dropdowns.about && (
     <div className="pl-6 space-y-4 flex flex-col ml-15 mt-4">
-      <Link to="/about/history" className="text-sm" onClick={toggleMenu}>History</Link>
-      <Link to="/about/achievements" className="text-sm" onClick={toggleMenu}>Achievements</Link>
-      <Link to="/about/mission" className="text-sm" onClick={toggleMenu}>Mission</Link>
+      <Link to="/history" className="text-sm" onClick={toggleMenu}>History</Link>
+      <Link to="/achievements" className="text-sm" onClick={toggleMenu}>Achievements</Link>
+      <Link to="/vision" className="text-sm" onClick={toggleMenu}>Vision</Link>
     </div>
   )}
 </div>
@@ -124,8 +124,8 @@ const Navbar = () => {
   </button>
   {dropdowns.team && (
     <div className="pl-6 space-y-4 flex flex-col ml-15 mt-4">
-      <Link to="/team" className="text-sm" onClick={toggleMenu}>Our Team</Link>
-      <Link to="/team/coaches" className="text-sm" onClick={toggleMenu}>Coaches</Link>
+      <Link to="/boys" className="text-sm" onClick={toggleMenu}>Boys Team</Link>
+      <Link to="/girls" className="text-sm" onClick={toggleMenu}>Girls Team</Link>
     </div>
   )}
 </div>
@@ -142,8 +142,8 @@ const Navbar = () => {
   </button>
   {dropdowns.joinus && (
     <div className="pl-6 space-y-4 flex flex-col ml-15 mt-4">
-      <Link to="/joinus" className="text-sm" onClick={toggleMenu}>How to Join</Link>
-      <Link to="/joinus/teams" className="text-sm" onClick={toggleMenu}>Our Teams</Link>
+      <Link to="/online-admission" className="text-sm" onClick={toggleMenu}>Admission</Link>
+      <Link to="/coaches" className="text-sm" onClick={toggleMenu}>Top Players & Coaches</Link>
     </div>
   )}
 </div>
@@ -160,10 +160,9 @@ const Navbar = () => {
   </button>
   {dropdowns.contact && (
     <div className="pl-6 space-y-4 flex flex-col ml-15 mt-4">
-      <Link to="/contact" className="text-sm" onClick={toggleMenu}>Contact Form</Link>
       <Link to="/location" className="text-sm" onClick={toggleMenu}>Location</Link>
-      <Link to="/contact/feedback" className="text-sm" onClick={toggleMenu}>Social links</Link>
-      <Link to="/donation" className="text-sm" onClick={toggleMenu}>Donation</Link>
+      <Link to="/support" className="text-sm" onClick={toggleMenu}>Support</Link>
+      <Link to="/donate" className="text-sm" onClick={toggleMenu}>Donate</Link>
     </div>
   )}
 </div>

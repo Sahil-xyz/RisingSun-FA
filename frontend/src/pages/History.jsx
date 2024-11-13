@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import { FaMapMarkerAlt, FaTrophy, FaLightbulb, FaHandshake } from "react-icons/fa";
-import Footer from "../pages/Footer";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -12,7 +11,7 @@ import history from "../assets/history.png";
 
 const History = () => {
   return (
-    <div className="font-pop bg-white text-black min-h-screen p-6">
+    <div className="font-pop bg-slate-200 text-black min-h-screen p-6">
       <header className="py-4">
       {/* <Link to="/" className="flex items-center text-cyan-400 hover:underline">
           <FaArrowLeft className="mr-2" /> Back to Home
@@ -32,11 +31,11 @@ const History = () => {
         </section>
         <section className="py-6">
           <h2 className="text-2xl font-semibold">Milestones</h2>
-          <VerticalTimeline ca>
+          <VerticalTimeline>
             <VerticalTimelineElement
               className="vertical-timeline-element--work"
               contentStyle={{ background: "rgb(203 213 225)", color: "#000" }}
-              contentArrowStyle={{ borderRight: "2px solid  rgb(203 213 225)" }}
+              contentArrowStyle={{ borderRight: "7px solid  rgb(203 213 225)" }}
               date="2010"
               iconStyle={{ background: "cyan", color: "#000" }}
               icon={<FaMapMarkerAlt />}
