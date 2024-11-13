@@ -133,7 +133,7 @@ const Home = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 max-w-7xl w-full px-4">
         
         {/* Training Section */}
-        <Link to="/gallery/training" className="relative group">
+        <Link to="/gallery" className="relative group">
           <img
             src="https://sesafootballacademy.in/wp-content/themes/sfa-home/images/training.jpg" // Replace with actual image
             alt="Training"
@@ -145,7 +145,7 @@ const Home = () => {
         </Link>
 
         {/* Practice Section */}
-        <Link to="/gallery/practice" className="relative group">
+        <Link to="/gallery" className="relative group">
           <img
             src="https://sesafootballacademy.in/wp-content/themes/sfa-home/images/practics.jpg" // Replace with actual image
             alt="Practice"
@@ -157,7 +157,7 @@ const Home = () => {
         </Link>
 
         {/* Teams Section */}
-        <Link to="/gallery/teams" className="relative group">
+        <Link to="/gallery" className="relative group">
           <img
             src="https://sesafootballacademy.in/wp-content/themes/sfa-home/images/teams.jpg" // Replace with actual image
             alt="Teams"
@@ -169,7 +169,7 @@ const Home = () => {
         </Link>
 
         {/* League Section */}
-        <Link to="/gallery/league" className="relative group">
+        <Link to="/gallery" className="relative group">
           <img
             src="https://sesafootballacademy.in/wp-content/themes/sfa-home/images/lauge.jpg" // Replace with actual image
             alt="League"

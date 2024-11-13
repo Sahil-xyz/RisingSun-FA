@@ -21,6 +21,8 @@ import ForgotPasswordForm from "./pages/ForgotPasswordForm";
 import ResetPasswordForm from "./pages/ResetPasswordForm";
 import DonatePage from "./pages/DonatePage";
 import TeamList from "./pages/TeamList";
+import Gallery from "./pages/Gallery";
+import BoysTeamList from "./pages/BoysTeamList";
 
 // Main App component
 //import { Verify } from "crypto";
@@ -48,6 +50,8 @@ const App = () => {
         <Route path="/Support" element={ <Support/> } />
         <Route path="/donate" element={ <DonatePage/> } />
         <Route path="/team-list" element={<TeamList/> } />
+        <Route path="/Gallery" element={<Gallery/> } />
+        <Route path="/BoysTeamList" element={<BoysTeamList/> } />
       </Routes>
       <Footer/>  
       <Toaster position="bottom-right" reverseOrder={false} />
