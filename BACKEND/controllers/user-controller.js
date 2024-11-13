@@ -328,7 +328,7 @@ export const getTeamById = async (req, res) => {
 // Get Boys Teams
 export const getBoysTeams = async (req, res) => {
   try {
-    const displayedTeams = await Team.find({teamGender:'Boys'});
+    const displayedTeams = await Team.find({teamGender:'Boys', display:'true'}).populate('players');
     res.status(200).json({
       success: true,
       data: displayedTeams,
@@ -346,7 +346,7 @@ export const getBoysTeams = async (req, res) => {
 // Get Girls Teams
 export const getGirlsTeams = async (req, res) => {
   try {
-    const displayedTeams = await Team.find({teamGender:'Girls'});
+    const displayedTeams = await Team.find({teamGender:'Girls', display:'true'}).populate('players');
     res.status(200).json({
       success: true,
       data: displayedTeams,

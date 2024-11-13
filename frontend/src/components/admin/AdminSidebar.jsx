@@ -23,7 +23,7 @@ const AdminSidebar = () => {
   ];
 
   return (
-    <div className="h-screen flex">
+    <div className="h-full flex">
       {/* Toggle Button for small screens */}
       <button
         className="text-gray-200 p-4 md:hidden fixed top-4 left-4 z-20"
