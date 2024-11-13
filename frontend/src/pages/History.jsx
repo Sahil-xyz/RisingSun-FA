@@ -12,9 +12,9 @@ import history from "../assets/history.png";
 
 const History = () => {
   return (
-    <div className="font-pop bg-[#010B13] text-white min-h-screen p-6">
+    <div className="font-pop bg-white text-black min-h-screen p-6">
       <header className="py-4">
-      {/* <Link to="/" className="flex items-center text-yellow-400 hover:underline">
+      {/* <Link to="/" className="flex items-center text-cyan-400 hover:underline">
           <FaArrowLeft className="mr-2" /> Back to Home
         </Link> */}
       <img src={history} alt="Academy Team" className="w-full h-64.5 object-cover" />
@@ -32,13 +32,13 @@ const History = () => {
         </section>
         <section className="py-6">
           <h2 className="text-2xl font-semibold">Milestones</h2>
-          <VerticalTimeline>
+          <VerticalTimeline ca>
             <VerticalTimelineElement
               className="vertical-timeline-element--work"
-              contentStyle={{ background: "#333", color: "#fff" }}
-              contentArrowStyle={{ borderRight: "7px solid  #333" }}
+              contentStyle={{ background: "rgb(203 213 225)", color: "#000" }}
+              contentArrowStyle={{ borderRight: "2px solid  rgb(203 213 225)" }}
               date="2010"
-              iconStyle={{ background: "yellow", color: "#333" }}
+              iconStyle={{ background: "cyan", color: "#000" }}
               icon={<FaMapMarkerAlt />}
             >
               <h3 className="vertical-timeline-element-title">Academy Founded</h3>
@@ -46,10 +46,10 @@ const History = () => {
             </VerticalTimelineElement>
             <VerticalTimelineElement
               className="vertical-timeline-element--work"
-              contentStyle={{ background: "#333", color: "#fff" }}
-              contentArrowStyle={{ borderRight: "7px solid  #333" }}
+              contentStyle={{ background: "rgb(203 213 225)", color: "#000" }}
+              contentArrowStyle={{ borderRight: "7px solid  rgb(203 213 225)" }}
               date="2012"
-              iconStyle={{ background: "yellow", color: "#333" }}
+              iconStyle={{ background: "cyan", color: "#000" }}
               icon={<FaTrophy />}
             >
               <h3 className="vertical-timeline-element-title">
@@ -59,10 +59,10 @@ const History = () => {
             </VerticalTimelineElement>
             <VerticalTimelineElement
               className="vertical-timeline-element--work"
-              contentStyle={{ background: "#333", color: "#fff" }}
-              contentArrowStyle={{ borderRight: "7px solid  #333" }}
+              contentStyle={{ background: "rgb(203 213 225)", color: "#000" }}
+              contentArrowStyle={{ borderRight: "7px solid  rgb(203 213 225)" }}
               date="2015"
-              iconStyle={{ background: "yellow", color: "#333" }}
+              iconStyle={{ background: "cyan", color: "#000" }}
               icon={<FaLightbulb />}
             >
               <h3 className="vertical-timeline-element-title">
@@ -72,10 +72,10 @@ const History = () => {
             </VerticalTimelineElement>
             <VerticalTimelineElement
               className="vertical-timeline-element--work"
-              contentStyle={{ background: "#333", color: "#fff" }}
-              contentArrowStyle={{ borderRight: "7px solid  #333" }}
+              contentStyle={{ background: "rgb(203 213 225)", color: "#000" }}
+              contentArrowStyle={{ borderRight: "7px solid  rgb(203 213 225)" }}
               date="2018"
-              iconStyle={{ background: "yellow", color: "#333" }}
+              iconStyle={{ background: "cyan", color: "#000" }}
               icon={<FaHandshake />}
             >
               <h3 className="vertical-timeline-element-title">
@@ -85,10 +85,10 @@ const History = () => {
             </VerticalTimelineElement>
             <VerticalTimelineElement
               className="vertical-timeline-element--work"
-              contentStyle={{ background: "#333", color: "#fff" }}
-              contentArrowStyle={{ borderRight: "7px solid  #333" }}
+              contentStyle={{ background: "rgb(203 213 225)", color: "#000" }}
+              contentArrowStyle={{ borderRight: "7px solid  rgb(203 213 225)" }}
               date="2020"
-              iconStyle={{ background: "yellow", color: "#333" }}
+              iconStyle={{ background: "cyan", color: "#000" }}
               icon={<FaLightbulb />}
             >
               <h3 className="vertical-timeline-element-title">
