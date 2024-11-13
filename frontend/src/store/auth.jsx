@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
         storeTokenInLS,
         isLoggedIn,
         LogoutUser,
-        user,
+        user
       }}
     >
       {children}

@@ -4,8 +4,8 @@ import { Toaster } from "react-hot-toast";
 import AdminSidebar from "./AdminSidebar";
 // import AdminTeams from "./AdminTeams";
 import AdminDashboard from "./AdminDashboard";
-// import ErrorPage from "../../pages/ErrorPage";
-// import { useAuth } from "../../store/auth";
+import ErrorPage from "../../pages/ErrorPage";
+import { useAuth } from "../../store/auth";
 import AdmissionPage from "../../pages/AdmissionPage";
 import CreateTeam from "./CreateTeam";
 import EditTeam from "./EditTeam";
@@ -13,10 +13,10 @@ import DisplayTeams from "./DisplayTeams";
 
 const Admin = () => {
   // Checks if the user is Admin or not.
-  // const { user } = useAuth();
-  // const isAdmin = user?.isAdmin;
+  const { user } = useAuth();
+  const isAdmin = user?.isAdmin;
   return (
-  // return isAdmin ? (
+  isAdmin ? (
     <div className="flex">
       {/* Sidebar */}
       <div className="h-screen bg-gray-800">
@@ -35,9 +35,9 @@ const Admin = () => {
       </div>
     </div>
     
-  // ) : (
-  //   <ErrorPage />
-  // );
+  ) : (
+     <ErrorPage />
+  )
   )
 };
 

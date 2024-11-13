@@ -7,7 +7,7 @@ const CreateTeam = () => {
   const [teamData, setTeamData] = useState({
     name: '',
     coach: '',
-    formation: '',
+    teamGender: '',
     achievements: [],
     display: false,
   });
@@ -57,7 +57,7 @@ const CreateTeam = () => {
       setTeamData({
         name: '',
         coach: '',
-        formation: '',
+        teamGender: '',
         achievements: [],
         display: false,
       });
@@ -95,15 +95,18 @@ const CreateTeam = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700">Formation</label>
-          <input
-            type="text"
-            name="formation"
-            value={teamData.formation}
+          <label className="block text-gray-700">Team Gender</label>
+          <select
+            name="teamGender"
+            value={teamData.teamGender}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded"
             required
-          />
+          >
+          <option value="" disabled>Select Gender</option>
+              <option value="Boys">Boys</option>
+              <option value="Girls">Girls</option>
+          </select>
         </div>
 
         {/* Achievements Section */}

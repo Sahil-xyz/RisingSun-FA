@@ -22,13 +22,13 @@ export const getAllUsers = async (req, res, next) => {
 // controllers/teamController.js
 export const createTeam = async (req, res) => {
   try {
-    const { name, coach, formation, establishedYear, achievements, players, display } = req.body;
+    const { name, coach, teamGender, establishedYear, achievements, players, display } = req.body;
 
     // Create a new team document
     const newTeam = new Team({
       name,
       coach,
-      formation,
+      teamGender,
       establishedYear,
       achievements,
       players,
