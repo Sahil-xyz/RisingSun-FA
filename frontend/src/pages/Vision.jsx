@@ -1,19 +1,27 @@
 import React from "react";
 import { motion } from "framer-motion";
+import football from '../assets/football.jpg'
+import girls from '../assets/girl.jpg'
+import dedication from '../assets/dedication.jpg'
+import team from '../assets/team.jpg'
+import world from '../assets/world.jpg'
+import community from '../assets/community.jpg'
+import inovation from '../assets/inovation.jpg'
 
 
 const Vision = () => {
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-8">
-      <div className="container mx-auto space-y-20">
+    <div className=" text-black min-h-screen p-8 z-50" >
+      <div className="container mx-auto space-y-20" style={{
+      backgroundImage: football,
+      backgroundSize: 'cover',        // Covers the whole div
+      backgroundPosition: 'center',    // Centers the image
+      backgroundRepeat: 'no-repeat'    // Prevents tiling
+    }}>
 
         {/* Hero Section */}
         <section className="text-center relative">
-          <img 
-            src="" 
-            alt="Vision Background" 
-            className="absolute inset-0 w-full h-full object-cover opacity-20"
-          />
+          
           <motion.h1 
             className="text-5xl font-bold mb-4 text-yellow-400 relative"
             initial={{ opacity: 0, y: -50 }}
@@ -23,7 +31,7 @@ const Vision = () => {
             Our Vision
           </motion.h1>
           <motion.p 
-            className="text-lg text-gray-300 max-w-3xl mx-auto relative"
+            className="text-lg text-black max-w-3xl mx-auto relative"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
@@ -35,8 +43,8 @@ const Vision = () => {
         {/* Core Values Section */}
         <section className="space-y-12 relative">
           <img 
-            src="/path/to/values-background.jpg" 
-            alt="Core Values Background" 
+            src='girls' 
+            alt="" 
             className="absolute inset-0 w-full h-full object-cover opacity-10"
           />
           <motion.h2 
@@ -49,9 +57,9 @@ const Vision = () => {
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             {[
-              { title: "Integrity", description: "Building a culture of trust and honesty, where every action is guided by strong ethical principles.", image: "/path/to/integrity.jpg" },
-              { title: "Dedication", description: "Commitment to hard work and continuous improvement in every aspect of the game.", image: "/path/to/dedication.jpg" },
-              { title: "Teamwork", description: "Fostering collaboration and respect, believing in the power of unity to achieve greatness.", image: "/path/to/teamwork.jpg" }
+              { title: "Integrity", description: "Building a culture of trust and honesty, where every action is guided by strong ethical principles.", image: girls },
+              { title: "Dedication", description: "Commitment to hard work and continuous improvement in every aspect of the game.", image: dedication },
+              { title: "Teamwork", description: "Fostering collaboration and respect, believing in the power of unity to achieve greatness.", image: team }
             ].map((value, index) => (
               <motion.div
                 key={index}
@@ -72,8 +80,8 @@ const Vision = () => {
         <section className="space-y-12 relative">
           <img 
             src="/path/to/goals-background.jpg" 
-            alt="Goals Background" 
-            className="absolute inset-0 w-full h-full object-cover opacity-10"
+            alt="" 
+            className="absolute inset-0 w-full h-full object-cover "
           />
           <motion.h2 
             className="text-4xl font-semibold text-yellow-400 text-center relative"
@@ -85,7 +93,7 @@ const Vision = () => {
           </motion.h2>
           <div className="text-center relative space-y-8">
             <motion.p 
-              className="text-lg text-gray-400 max-w-4xl mx-auto"
+              className="text-lg text-black max-w-4xl mx-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
@@ -94,9 +102,9 @@ const Vision = () => {
             </motion.p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { title: "Develop World-Class Players", description: "Continuously train players to reach their highest potential, preparing them for the global stage.", image: "/path/to/players.jpg" },
-                { title: "Expand Community Programs", description: "Extend our reach through community programs, inspiring youth and promoting positive change.", image: "/path/to/community.jpg" },
-                { title: "Promote Innovation in Training", description: "Invest in advanced techniques and technology to stay at the forefront of football training.", image: "/path/to/innovation.jpg" }
+                { title: "Develop World-Class Players", description: "Continuously train players to reach their highest potential, preparing them for the global stage.", image:world },
+                { title: "Expand Community Programs", description: "Extend our reach through community programs, inspiring youth and promoting positive change.", image: community },
+                { title: "Promote Innovation in Training", description: "Invest in advanced techniques and technology to stay at the forefront of football training.", image: inovation}
               ].map((goal, index) => (
                 <motion.div
                   key={index}

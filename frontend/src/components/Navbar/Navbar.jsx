@@ -45,7 +45,7 @@ const Navbar = () => {
               <Link to="/admin" className="text-sm md:text-base">Admin</Link>
             </>
           ) : (
-            <Link to="/home" className="text-sm md:text-base">Home</Link>
+            <Link to="/" className="text-sm md:text-base">Home</Link>
           )}
           <FlyoutLink  FlyoutContent={AboutContent} className="text-sm md:text-base">  <Link to="/">About</Link></FlyoutLink>
           <FlyoutLink  FlyoutContent={TeamContent} className="text-sm md:text-base">   <Link to="/">Team</Link></FlyoutLink>
