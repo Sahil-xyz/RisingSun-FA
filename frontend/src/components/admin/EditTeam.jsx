@@ -4,20 +4,19 @@ import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
 const EditTeam = () => {
-  const { id } = useParams(); // Get team ID from URL parameters
+  const { id } = useParams();
   const [teamData, setTeamData] = useState({
     name: '',
     coach: '',
-    formation: '',
+    teamGender: '',
     achievements: [],
-    players: [], // Array to hold player IDs
+    players: [],
     display: false,
   });
 
-  const [searchResults, setSearchResults] = useState([]); // Store search results for players
+  const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Fetch existing team data
   useEffect(() => {
     const fetchTeam = async () => {
       try {
@@ -49,7 +48,6 @@ const EditTeam = () => {
     }));
   };
 
-  // Search for players by name
   const handleSearch = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -62,18 +60,17 @@ const EditTeam = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      setSearchResults(response.data.data); // Store search results
+      setSearchResults(response.data.data);
     } catch (error) {
       console.error('Error searching for players:', error);
       toast.error('Failed to search players.');
     }
   };
 
-  // Add player to team
   const addPlayer = (playerId) => {
     setTeamData((prev) => ({
       ...prev,
-      players: [...prev.players, playerId], // Add selected player ID to players array
+      players: [...prev.players, playerId],
     }));
   };
 
@@ -86,9 +83,9 @@ const EditTeam = () => {
         return;
       }
 
-      const response = await axios.put(`http://localhost:8000/api/v1/admin/teams/${id}`, {
+      await axios.put(`http://localhost:8000/api/v1/admin/teams/${id}`, {
         ...teamData,
-        admissions: teamData.players, // Send selected player IDs in admissions array
+        admissions: teamData.players,
       }, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -127,15 +124,30 @@ const EditTeam = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700">Formation</label>
-          <input
-            type="text"
-            name="formation"
-            value={teamData.formation}
+          <label className="block text-gray-700">Team Gender</label>
+          <select
+            name="teamGender"
+            value={teamData.teamGender}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded"
             required
+          >
+          <option value="" disabled>Select Gender</option>
+              <option value="Boys">Boys</option>
+              <option value="Girls">Girls</option>
+          </select>
+        </div>
+
+        {/* Display Checkbox */}
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            name="display"
+            checked={teamData.display}
+            onChange={handleChange}
+            className="mr-2"
           />
+          <label className="text-gray-700">Display on Frontend</label>
         </div>
 
         {/* Player Search and Selection */}
@@ -152,7 +164,6 @@ const EditTeam = () => {
             Search
           </button>
           
-          {/* Display search results */}
           <div className="mt-2">
             {searchResults.map((player) => (
               <div key={player._id} className="flex items-center justify-between">

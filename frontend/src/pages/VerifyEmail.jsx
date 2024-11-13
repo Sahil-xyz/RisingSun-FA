@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Assuming you have routing set up
+import toast from "react-hot-toast";
 
 const VerifyEmail = () => {
   const [otp, setOtp] = useState(Array(6).fill("")); // Array for OTP input (6 characters)
@@ -39,14 +40,13 @@ const VerifyEmail = () => {
       const response = await axios.post("http://localhost:8000/api/v1/user/verifyEmail", { code: otpCode });
 
       if (response.data.success) {
-        setSuccessMessage("Email verified successfully!");
-        // Redirect to another page (e.g., dashboard or home)
-        setTimeout(() => navigate("/"), 500); // Redirect after 2 seconds
+        navigate("/login");
+        toast.success("Email Verified Successfully...!")
       } else {
         setErrorMessage(response.data.message || "Something went wrong.");
       }
     } catch (error) {
-      setErrorMessage("Failed to verify email. Please try again later.");
+      toast.error("Failed to verify email. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -61,7 +61,7 @@ const VerifyEmail = () => {
 
   return (
     <section className="bg-white py-10 dark:bg-dark">
-      <div className="container max-w-md mx-auto">
+      <div className="container max-w-md mx-auto mt-32">
         <h2 className="text-2xl font-semibold text-center">Verify Your Email</h2>
         <form
           onSubmit={handleSubmit}

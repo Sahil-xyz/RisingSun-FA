@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const TeamList = () => {
+const GirlsTeamList = () => {
   const [teams, setTeams] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -10,7 +10,7 @@ const TeamList = () => {
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/user/team');
+        const response = await axios.get('http://localhost:8000/api/v1/user/teams/girls');
         setTeams(response.data.data);
         setSelectedTeam(response.data.data[0]); // Default to the first team
         setLoading(false);
@@ -31,7 +31,7 @@ const TeamList = () => {
     <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://via.placeholder.com/1600x900')" }}>
       <div className="bg-purple-800 bg-opacity-60 py-12">
         <div className="max-w-5xl mx-auto text-center text-white">
-          <h1 className="text-4xl font-bold">Boys Team</h1>
+          <h1 className="text-4xl font-bold">Girls Team</h1>
           <p className="text-xl mt-2">Select a Team</p>
           <div className="flex justify-center mt-4 space-x-4">
             {teams.map((team) => (
@@ -72,4 +72,4 @@ const TeamList = () => {
   );
 };
 
-export default TeamList;
+export default GirlsTeamList;

@@ -3,7 +3,7 @@ import { useAuth } from "../store/auth"; // Assuming you have an auth context or
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const { user } = useAuth(); // Assuming `user` object contains email and username
+  const { user } = useAuth(); 
   
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -21,7 +21,7 @@ const Profile = () => {
         <div>
           <Link to="/logout" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-
           2 px-4 rounded">Logout</Link>
-          </div>
+        </div>
       </div>
     </div>
   );

@@ -324,3 +324,39 @@ export const getTeamById = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+// Get Boys Teams
+export const getBoysTeams = async (req, res) => {
+  try {
+    const displayedTeams = await Team.find({teamGender:'Boys'});
+    res.status(200).json({
+      success: true,
+      data: displayedTeams,
+    });
+  } catch (error) {
+    console.error("Error fetching displayed teams:", error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch displayed teams',
+      error: error.message,
+    });
+  }
+};
+
+// Get Girls Teams
+export const getGirlsTeams = async (req, res) => {
+  try {
+    const displayedTeams = await Team.find({teamGender:'Girls'});
+    res.status(200).json({
+      success: true,
+      data: displayedTeams,
+    });
+  } catch (error) {
+    console.error("Error fetching displayed teams:", error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch displayed teams',
+      error: error.message,
+    });
+  }
+};

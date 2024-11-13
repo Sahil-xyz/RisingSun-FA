@@ -8,9 +8,9 @@ import Register from "./pages/Register"; // Adjusted path for Register
 import { Toaster } from "react-hot-toast"; // Toaster for notifications
 import VerifyEmail from "./pages/VerifyEmail"
 import Profile from "./pages/Profile";
-import Girls from "./pages/Girls";
+// import Girls from "./pages/Girls";
 import Footer from "./pages/Footer";
-import Boys from "./pages/Boys";
+// import Boys from "./pages/Boys";
 import History from "./pages/History";
 import Coaches from "./pages/Coaches";
 import Achievement from "./pages/Achievment";
@@ -20,7 +20,9 @@ import Support from "./pages/Support";
 import ForgotPasswordForm from "./pages/ForgotPasswordForm";
 import ResetPasswordForm from "./pages/ResetPasswordForm";
 import DonatePage from "./pages/DonatePage";
-import TeamList from "./pages/TeamList";
+// import TeamList from "./pages/TeamList";
+import BoysTeamList from "./pages/BoysTeamList";
+import GirlsTeamList from "./pages/GirlsTeamList";
 
 // Main App component
 //import { Verify } from "crypto";
@@ -29,6 +31,7 @@ const App = () => {
   return (
     <>
       <Navbar /> {/* Always show the Navbar */}
+      <div className="pt-20">
       <Routes>
         <Route path="/" element={ <Home/> } />
         <Route path="/login" element={ <Login />} />
@@ -38,8 +41,8 @@ const App = () => {
         <Route path="/forget-password" element={<ForgotPasswordForm/>} />
         <Route path="/reset-password/:token" element={<ResetPasswordForm/>} />
         <Route path="/profile" element={ <Profile/> } />
-        <Route path="/Boys" element={ <Boys/> } />
-        <Route path="/Girls" element={ <Girls/> } />
+        {/* <Route path="/Boys" element={ <Boys/> } />
+        <Route path="/Girls" element={ <Girls/> } /> */}
         <Route path="/Coaches" element={ <Coaches/> } />
         <Route path="/History" element={ <History/> } />
         <Route path="/Achievement" element={ <Achievement/> } />
@@ -47,8 +50,10 @@ const App = () => {
         <Route path="/Location" element={ <Location/> } />
         <Route path="/Support" element={ <Support/> } />
         <Route path="/donate" element={ <DonatePage/> } />
-        <Route path="/team-list" element={<TeamList/> } />
+        <Route path="/boys" element={<BoysTeamList/> } />
+        <Route path="/girls" element={<GirlsTeamList/> } />
       </Routes>
+      </div>
       <Footer/>  
       <Toaster position="bottom-right" reverseOrder={false} />
       

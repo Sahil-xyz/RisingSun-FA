@@ -6,7 +6,8 @@ module.exports = {
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
         poppins: ["Poppins", "system-ui"],
-        ptsans: ["PT Sans", "system-ui"]
+        ptsans: ["PT Sans", "system-ui"],
+        yatra: ["Yatra One", "system-ui"]
       },
       animation: {
         'spin-slow': 'spin 3s linear infinite', 

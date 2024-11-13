@@ -1,104 +1,116 @@
 import React, { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import FlyoutLink from "./FlyoutLink";
-//import Home from "../pages/Home";
-//import Home from "./Home"; 
-// import AchievementsPage from "./About/Achievement";
 import AboutContent from "./AboutContent";
 import TeamContent from "./TeamContent";
 import JoinusContent from "./JoinusContent";
 import ContactContent from "./ContactContent";
-// import Login from "../pages/Login";
-
 import { Link } from "react-router-dom";
+import { useAuth } from "../../store/auth";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const {isLoggedIn} = useAuth();
+  const { user } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  return (
-    <div className="bg-[#010B13] p-4 text-white shadow-lg">
-      <div className="max-w-[1600px] flex items-center justify-between mx-auto py-[15px]">
-        <h2 className="text-xl md:text-2xl font-bold ml-4">
-          RISING SUN <span className="text-[#FFD700]">FA</span>
-        </h2>
-        <div className="hidden md:flex items-center space-x-6">
-        
-        <Link to="/home" className="text-lg">Home</Link> 
-                
-        <FlyoutLink href="#" FlyoutContent={AboutContent} className="text-sm md:text-base">
-            About
-          </FlyoutLink>
-          <FlyoutLink href="#" FlyoutContent={TeamContent} className="text-sm md:text-base">
-       
-            Team
-          </FlyoutLink>
-          <FlyoutLink href="#" FlyoutContent={JoinusContent} className="text-sm md:text-base">
-            Join Us
-          </FlyoutLink>
-          <FlyoutLink href="#" FlyoutContent={ContactContent} className="text-sm md:text-base">
-            Contact
-          </FlyoutLink>
-        </div>
-        <div className="hidden md:block">
-  <Link to="/login">
-    <button className="rounded-sm bg-[#FFD700] px-4 py-2 text-sm md:px-6 md:py-2 font-semibold text-black hover:bg-[#B5D53E]">
-      Login
-    </button>
-  </Link>
-</div>
+  <FlyoutLink
+        href="#"
+        submenuItems={[
+          { label: "History", href: "/about/history" },
+          { label: "Achievements", href: "/about/achievements" },
+          { label: "Mission", href: "/about/mission" },
+        ]}
+      >
+        About
+      </FlyoutLink>
 
-        <div className="md:hidden text-white text-2xl">
-          {isMenuOpen ? (
-            <AiOutlineClose onClick={toggleMenu} className='text-white text-2xl md:hidden block'/>
-          ) : (
-            <AiOutlineMenu onClick={toggleMenu} className='text-white text-2xl md:hidden block' />
-          )}
+  return (
+    <div className="bg-white p-4 text-black shadow-lg fixed w-full z-50">
+      <div className="max-w-[1600px] flex items-center justify-between mx-auto py-[10px]">
+        <h2 className="text-xl md:text-2xl font-bold ml-4">
+          RISING SUN <span className="text-red-600">FA</span>
+        </h2>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center space-x-6 font-bold">
+          
+          {
+            user?.isAdmin? (
+              <>
+              <Link to="/home" className="text-sm md:text-base">Home</Link>
+              <Link to="/admin" className="text-sm md:text-base">Admin</Link>
+              </>
+            ) : (
+              <Link to="/home" className="text-sm md:text-base">Home</Link>
+            )
+          }
+          <FlyoutLink href="#" FlyoutContent={AboutContent} className="text-sm md:text-base">About</FlyoutLink>
+          <FlyoutLink href="#" FlyoutContent={TeamContent} className="text-sm md:text-base">Team</FlyoutLink>
+          <FlyoutLink href="#" FlyoutContent={JoinusContent} className="text-sm md:text-base">Join Us</FlyoutLink>
+          <FlyoutLink href="#" FlyoutContent={ContactContent} className="text-sm md:text-base">Contact</FlyoutLink>
+        </div>
+
+        {/* Desktop Login Button */}
+        <div className="hidden md:block">
+          {
+            isLoggedIn ? (
+              <Link to="/profile">
+            <button className="rounded-sm bg-[#FFD700] px-4 py-2 text-sm md:px-6 md:py-2 font-semibold text-black hover:bg-[#B5D53E]">
+              Profile
+            </button>
+          </Link>
+            ) : (
+              <Link to="/login">
+            <button className="rounded-sm bg-[#FFD700] px-4 py-2 text-sm md:px-6 md:py-2 font-semibold text-black hover:bg-[#B5D53E]">
+              Login
+            </button>
+          </Link>
+            )
+          }
+          
+        </div>
+
+        {/* Mobile Menu Icon */}
+        <div className="md:hidden text-black text-2xl" onClick={toggleMenu}>
+          {isMenuOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
         </div>
       </div>
-      {/* Responsive menu */}
+
+      {/* Mobile Menu */}
       <div
-        className={`duration-300 md:hidden w-full h-screen fixed bg-[#010B13] text-white top-[90px] ${
-          isMenuOpen ? "left-0" : "left-[-100%]"
-        }`}
+        className={`fixed top-0 left-0 w-full h-screen bg-[#010B13] text-white flex flex-col items-start justify-center transform ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out md:hidden z-40`}
       >
-        <ul className="flex flex-col items-start justify-center h-full space-y-8 pl-10">
-        
-        <Link to="/home" className="text-lg">Home</Link> 
-        
+        <div className="flex flex-col space-y-8 pl-10">
+          <Link to="/home" className="text-lg" onClick={toggleMenu}>Home</Link>
+          <FlyoutLink href="#" FlyoutContent={AboutContent} className="text-lg" onClick={toggleMenu}>About</FlyoutLink>
+          <FlyoutLink href="#" FlyoutContent={TeamContent} className="text-lg" onClick={toggleMenu}>Team</FlyoutLink>
+          <FlyoutLink href="#" FlyoutContent={JoinusContent} className="text-lg" onClick={toggleMenu}>Join Us</FlyoutLink>
+          <FlyoutLink href="#" FlyoutContent={ContactContent} className="text-lg" onClick={toggleMenu}>Contact</FlyoutLink>
 
-          <li className="hover:z-10 ">
-            <FlyoutLink href="#" FlyoutContent={AboutContent} className="text-lg">
-              About
-            </FlyoutLink>
-          </li>
-          <li className="hover:z-10">
-            <FlyoutLink href="#" FlyoutContent={TeamContent} className="text-lg">
-              Team
-            </FlyoutLink>
-          </li>
-          <li className="hover:z-10">
-            <FlyoutLink href="#" FlyoutContent={JoinusContent} className="text-lg">
-              Join Us
-            </FlyoutLink>
-          </li>
-          <li className="hover:z-10">
-            <FlyoutLink href="#" FlyoutContent={ContactContent} className="text-lg">
-              Contact
-            </FlyoutLink>
-          </li>
-          <div className="hidden md:block">
-  <Link to="/login">
-    <button className="rounded-sm bg-[#FFD700] px-4 py-2 text-sm md:px-6 md:py-2 font-semibold text-black hover:bg-[#B5D53E]">
-      Login
-    </button>
-  </Link>
-</div>
-
-        </ul>
+          {/* Mobile Login Button */}
+          {
+            isLoggedIn?
+            (
+              <Link to="/profile">
+            <button className="rounded-sm bg-[#FFD700] px-6 py-2 font-semibold text-black hover:bg-[#B5D53E]" onClick={toggleMenu}>
+              Profile
+            </button>
+          </Link>
+            ) : (
+              <Link to="/login">
+            <button className="rounded-sm bg-[#FFD700] px-6 py-2 font-semibold text-black hover:bg-[#B5D53E]" onClick={toggleMenu}>
+              Login
+            </button>
+          </Link>
+            )
+          }
+        </div>
       </div>
     </div>
   );

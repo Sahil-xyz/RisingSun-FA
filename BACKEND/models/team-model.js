@@ -18,9 +18,10 @@ const TeamSchema = new Schema({
       ref: 'Admission', // Referencing Admission model
     },
   ],
-  formation: {
+  teamGender: {
     type: String,
-    default: '4-4-2',
+    enum: ["Boys", "Girls"],
+    required: true
   },
   establishedYear: {
     type: Number,
