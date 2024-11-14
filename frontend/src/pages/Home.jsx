@@ -12,6 +12,10 @@ import coachImg from '../assets/undraw_teaching_re_g7e3(1).svg'
 import oppurnityImg from '../assets/undraw_junior_soccer_6sop(1).svg'
 import supportImg from '../assets/undraw_fans_re_cri3(1).svg'
 import facilityImg from '../assets/undraw_goal_-0-v5v(1).svg'
+import p1 from "../assets/player1.jpg";
+import leader1 from "../assets/l1.jpg";
+import leader2 from "../assets/l2.jpg";
+import leader3 from "../assets/l3.jpg";
 
 
 const benefits = [
@@ -112,7 +116,7 @@ const Home = () => {
       {/* Player Image */}
       <div className='w-75 rounded-md '>  
       <img
-        src="https://www.shutterstock.com/image-photo/leipzig-germany-june-18-2024-600nw-2480454921.jpg"
+        src={p1}
         alt="Player"
         className="w-full h-auto object-cover" // Ensures the image is responsive and doesn't overflow
       />
@@ -129,7 +133,20 @@ const Home = () => {
     <div className="lg:w-1/2 w-full p-6 lg:p-10 flex flex-col justify-center bg-gradient-to-b from-gray-50 to-white">
       <h2 className="text-3xl font-bold text-blue-700">Academy</h2>
       <p className="mt-4 text-gray-600 leading-relaxed">
-       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem doloremque consequatur nostrum culpa, beatae labore esse distinctio reprehenderit consectetur totam omnis provident, commodi quibusdam eius dolor, dolore sint. Itaque, consequuntur.
+      
+The Rising Sun FA was informally started over 7 years ago in 2016 and was formally established as a 
+NGO in 2021 with the objective to promote learning and development of life skills among 
+underprivileged children by giving them access to organized sports. Originally started with 7 players, 
+we now help more than 147 kids.
+The academy was started by Vijay Gupta – a qualified and licensed (D License) coach based out of 
+Mumbai, India. He has been coaching for the last 9 years and his vision is to give every child 
+irrespective of prejudice or privilege a chance to grow and develop through sports.
+Vijay was introduced to organized sports at the age of 9 through Magic Bus (an NGO) where he 
+developed his passion for sports. Through that program among other things, Vijay learned about the 
+importance of organized sports in promoting learning and development among children. So, after 
+completing his school and college education he trained to be a coach. Over the years he has played and 
+participated in many tournaments including those of Mumbai Football Association (MFA) and would 
+like to give children similar opportunities.
       </p>
       <a
         href="#"
@@ -154,7 +171,7 @@ const Home = () => {
       <div className="min-w-[300px] bg-white shadow-lg rounded-xl p-6 relative flex-shrink-0">
         <div className="flex flex-col items-center">
           <img
-            src="data:image/jpeg;base64,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" // Replace with another image source
+            src={leader1} // Replace with another image source
             alt="Leader"
             className="rounded-full w-32 h-32 mb-4"
           />
@@ -169,7 +186,7 @@ const Home = () => {
       <div className="min-w-[300px] bg-white shadow-lg rounded-xl p-6 relative flex-shrink-0">
         <div className="flex flex-col items-center">
           <img
-            src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/..." // Replace with another image source
+            src={leader2} // Replace with another image source
             alt="Leader"
             className="rounded-full w-32 h-32 mb-4"
           />
@@ -184,7 +201,7 @@ const Home = () => {
       <div className="min-w-[300px] bg-white shadow-lg rounded-xl p-6 relative flex-shrink-0">
         <div className="flex flex-col items-center">
           <img
-            src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/..." // Replace with another image source
+            src={leader3} // Replace with another image source
             alt="Leader"
             className="rounded-full w-32 h-32 mb-4"
           />
