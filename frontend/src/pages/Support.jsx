@@ -18,7 +18,7 @@ const Support = () => {
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-8">
+    <div className="bg-white text- min-h-screen p-8">
       <div className="container mx-auto space-y-12">
         
         {/* Hero Section */}

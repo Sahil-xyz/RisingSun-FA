@@ -2,13 +2,13 @@ import React from "react";
 
 const Location = () => {
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-8">
+    <div className="bg-white text-black min-h-screen p-8">
       <div className="container mx-auto space-y-12">
         
         {/* Hero Section */}
         <section className="text-center">
           <h1 className="text-5xl font-bold mb-4 text-yellow-400">Visit Us</h1>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-black max-w-3xl mx-auto">
             We are located in the heart of Goregaon West, Mumbai. Find our location, contact details, and directions below.
           </p>
         </section>
@@ -33,15 +33,15 @@ const Location = () => {
           <div className="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0 text-center md:text-left">
             <div>
               <h3 className="text-2xl font-bold text-yellow-300">Address</h3>
-              <p className="text-gray-400">Urban Sports Goregaon, Prabodhan Kridabhavan Maidan, near Ozone Swimming Pool, Siddharth Nagar, Goregaon West, Mumbai, Maharashtra 400104</p>
+              <p className="text-black">Urban Sports Goregaon, Prabodhan Kridabhavan Maidan, near Ozone Swimming Pool, Siddharth Nagar, Goregaon West, Mumbai, Maharashtra 400104</p>
             </div>
             <div>
               <h3 className="text-2xl font-bold text-yellow-300">Phone</h3>
-              <p className="text-gray-400">+1 (123) 456-7890</p>
+              <p className="text-black">+1 (123) 456-7890</p>
             </div>
             <div>
               <h3 className="text-2xl font-bold text-yellow-300">Email</h3>
-              <p className="text-gray-400">info@footballacademy.com</p>
+              <p className="text-black">info@footballacademy.com</p>
             </div>
           </div>
         </section>
@@ -50,7 +50,7 @@ const Location = () => {
         <section className="space-y-8">
           <h2 className="text-4xl font-semibold text-yellow-400 text-center">Operating Hours</h2>
           <div className="flex justify-center">
-            <ul className="text-gray-400">
+            <ul className="text-black">
               <li>Monday - Friday: 8:00 AM - 6:00 PM</li>
               <li>Saturday: 9:00 AM - 4:00 PM</li>
               <li>Sunday: Closed</li>
