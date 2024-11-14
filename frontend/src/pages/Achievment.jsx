@@ -1,4 +1,9 @@
 import React from "react";
+import achievementImage1 from "../assets/ac1.jpg";
+import achievementImage2 from "../assets/ac2.jpg";
+import achievementImage3 from "../assets/ac3.jpg";
+
+
 import champ from '../assets/champ.jpg'
 import award from '../assets/award.jpg'
 import coach2 from '../assets/coach2.jpg'
@@ -54,6 +59,7 @@ const Achievement = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
               <img
+                
                 src={champ}
                 alt="Championship Win"
                 className="w-full h-64 object-cover"
@@ -61,6 +67,7 @@ const Achievement = () => {
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
               <img
+                
                 src={award}
                 alt="Award Ceremony"
                 className="w-full h-64 object-cover"
@@ -68,6 +75,7 @@ const Achievement = () => {
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
               <img
+                
                 src={coach2}
                 alt="Player in Action"
                 className="w-full h-64 object-cover"

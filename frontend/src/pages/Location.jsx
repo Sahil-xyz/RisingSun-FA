@@ -33,15 +33,15 @@ const Location = () => {
           <div className="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0 text-center md:text-left">
             <div>
               <h3 className="text-2xl font-bold text-yellow-300">Address</h3>
-              <p className="text-black">Urban Sports Goregaon, Prabodhan Kridabhavan Maidan, near Ozone Swimming Pool, Siddharth Nagar, Goregaon West, Mumbai, Maharashtra 400104</p>
+              <p className="text-black">Urban Sports Goregaon, Prabodhan Kridabhavan Maidan, near Ozone Swimming Pool, Siddharth Nagar, Bandra West, Mumbai, Maharashtra 400104</p>
             </div>
             <div>
               <h3 className="text-2xl font-bold text-yellow-300">Phone</h3>
-              <p className="text-black">+1 (123) 456-7890</p>
+              <p className="text-black">+91 9322706770</p>  
             </div>
             <div>
               <h3 className="text-2xl font-bold text-yellow-300">Email</h3>
-              <p className="text-black">info@footballacademy.com</p>
+              <p className="text-black">RisingSun1@gmail.com</p>
             </div>
           </div>
         </section>

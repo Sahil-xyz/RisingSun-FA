@@ -8,6 +8,10 @@ const PaymentSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  email: {
+    type: String,
+    required: true
+  },
   amount: {
     type: Number,
     required: true,

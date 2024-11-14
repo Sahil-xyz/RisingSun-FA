@@ -34,9 +34,7 @@ router.route("/forgot-password").post(forgotPassword); // Forgot password
 router.route("/reset-password/:token").put(resetPassword); // Reset password with token
 router.route("/team").get(getTeams);
 router.route("/team/:id").get(getTeamById)
-
 router.route("/teams/boys").get( getBoysTeams);
-
 router.route("/teams/girls").get( getGirlsTeams);
 
 export default router;

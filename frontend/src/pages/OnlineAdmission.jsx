@@ -1,35 +1,117 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '../store/auth';
 
 const OnlineAdmission = () => {
-  const [amount, setAmount] = useState('');
+  const { user } = useAuth();  // Get user from context
+  const [loading, setLoading] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    dateOfBirth: '',
+    gender: 'Male',
+    role: 'Striker',
+    mode: 'Online',
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handlePayment = async () => {
+    if (!user?.email) {
+      console.error("User is not logged in or email is missing");
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      const userId = 'USER_ID'; // Replace with actual user ID from context or state
       const response = await axios.post('http://localhost:8000/api/v1/payment/create-checkout-session', {
-        userId,
-        amount: amount * 100, // Amount in cents for Stripe
+        email: user?.email,  // Send email as part of payment details
+        amount: 10000, // ₹1000 (in paise)
+        admissionDetails: formData,  // Send admission details as part of request
       });
 
-      if (response.data.id) {
-        window.location.href = `https://checkout.stripe.com/pay/${response.data.id}`;
-      }
+      const sessionId = response.data.id;
+      const stripe = window.Stripe('pk_test_51Q56EjEP7o2kKrafWnt7eZnbAvY2hx1dyG97UlD8dcLoMUjOcHRx8JGSiReNZIaa9WwSvD6HuvgpCa9SOSJQLgPr00THRW3Bnb');
+      await stripe.redirectToCheckout({ sessionId });
     } catch (error) {
-      console.error('Payment initiation error:', error);
+      console.error('Error initiating payment:', error);
     }
+
+    setLoading(false);
   };
 
   return (
-    <div>
-      <h2>Enter Payment Amount</h2>
-      <input
-        type="number"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        placeholder="Amount in INR"
-      />
-      <button onClick={handlePayment}>Pay Now</button>
+    <div className ="p-10"style={{backgroundImage:"url('https://prolevelacademy.com/wp-content/uploads/2022/07/New-HP1.jpg')"}}>
+    <div className=" max-w-lg mx-auto p-20 bg-gray-400 shadow-md rounded-lg border border-gray-200" >
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Online Admission</h2>
+      
+      <div className="mb-">
+        <label className="block text-gray-700 font-semibold mb-1">Full Name</label>
+        <input 
+          type="text" 
+          name="name" 
+          placeholder="Enter your full name" 
+          value={formData.name} 
+          onChange={handleChange} 
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-gray-700 font-semibold mb-1">Date of Birth</label>
+        <input 
+          type="date" 
+          name="dateOfBirth" 
+          value={formData.dateOfBirth} 
+          onChange={handleChange} 
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-gray-700 font-semibold mb-1">Gender</label>
+        <select 
+          name="gender" 
+          value={formData.gender} 
+          onChange={handleChange} 
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-gray-700 font-semibold mb-1">Role</label>
+        <select 
+          name="role" 
+          value={formData.role} 
+          onChange={handleChange} 
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+          <option value="Striker">Striker</option>
+          <option value="Defender">Defender</option>
+          <option value="Goalkeeper">Goalkeeper</option>
+          <option value="Midfielder">Midfielder</option>
+        </select>
+      </div>
+
+      <button 
+        onClick={handlePayment} 
+        disabled={loading} 
+        className={`w-full py-3 mt-6 text-white rounded-lg ${loading ? 'bg-gray-500' : 'bg-green-600 hover:bg-green-700'} focus:outline-none`}
+      >
+        {loading ? 'Processing...' : 'Pay ₹1000'}
+      </button>
+
+      {paymentStatus && <p className="mt-4 text-center text-green-600 font-semibold">{paymentStatus}</p>}
+    </div>
     </div>
   );
 };

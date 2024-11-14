@@ -15,6 +15,7 @@ import facilityImg from '../assets/undraw_goal_-0-v5v(1).svg'
 import one from '../assets/one.jpg'
 import two from '../assets/two.jpg'
 import three from '../assets/three.jpg'
+import homi from '../assets/home.jpg'
 
 
 
@@ -108,7 +109,7 @@ const Home = () => {
     {/* Left Side Image and Stats */}
     <div className="relative lg:w-1/2 w-full">
       {/* Overlay Box for Professional Footballers */}
-      <div className="absolute top-6 left-6 bg-blue-100 text-white text-center py-2 px-4 rounded-md z-10">
+      <div className="absolute top-6 left-6 bg-gray-400 text-white text-center py-2 px-4 rounded-md z-10">
         <p className="text-xl font-bold">230+</p>
         <p className="text-sm">Professional Footballers</p>
       </div>
@@ -116,9 +117,9 @@ const Home = () => {
       {/* Player Image */}
       <div className='w-75 rounded-md '>  
       <img
-        src="https://www.shutterstock.com/image-photo/leipzig-germany-june-18-2024-600nw-2480454921.jpg"
+        src={homi}
         alt="Player"
-        className="w-full h-auto object-cover" // Ensures the image is responsive and doesn't overflow
+        className="w-full h-auto object-fill" // Ensures the image is responsive and doesn't overflow
       />
        </div>
 
@@ -133,7 +134,7 @@ const Home = () => {
     <div className="lg:w-1/2 w-full p-6 lg:p-10 flex flex-col justify-center bg-gradient-to-b from-gray-50 to-white">
       <h2 className="text-3xl font-bold text-blue-700">Academy</h2>
       <p className="mt-4 text-gray-600 leading-relaxed">
-       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem doloremque consequatur nostrum culpa, beatae labore esse distinctio reprehenderit consectetur totam omnis provident, commodi quibusdam eius dolor, dolore sint. Itaque, consequuntur.
+      we are passionate about shaping future champions. Our academy is dedicated to training, inspiring, and nurturing young talent to excel both on and off the field. With top-notch coaches, world-class facilities, and a rich legacy in football excellence, we offer a holistic approach to player development. Join us and be part of a team where dreams take flight and potential turns into performance.
       </p>
       <a
         href="#"
@@ -152,7 +153,7 @@ const Home = () => {
     </div>
 
     {/* Scrollable container for leader cards */}
-    <div className="overflow-x-auto flex space-x-8 pb-4" >
+    <div className="overflow-x-auto flex justify-center space-x-8 pb-4" >
       
       {/* First Leader Card */}
       <div className="min-w-[300px] bg-white shadow-lg rounded-xl p-6 relative flex-shrink-0">
@@ -164,7 +165,7 @@ const Home = () => {
           />
           <h2 className="text-xl font-semibold">Leader Name 1</h2>
           <p className="text-gray-600 text-center mt-2">
-            Short description of the leader’s message or background.
+            2019 Finalist Football league
           </p>
         </div>
       </div>
@@ -179,7 +180,7 @@ const Home = () => {
           />
           <h2 className="text-xl font-semibold">Leader Name 2</h2>
           <p className="text-gray-600 text-center mt-2">
-            Short description of the leader’s message or background.
+            Khelo  India  Runner  Up  Goal  keeper
           </p>
         </div>
       </div>
@@ -194,7 +195,7 @@ const Home = () => {
           />
           <h2 className="text-xl font-semibold">Leader Name 3</h2>
           <p className="text-gray-600 text-center mt-2">
-            Short description of the leader’s message or background.
+            9+year of National Team Experience
           </p>
         </div>
       </div>

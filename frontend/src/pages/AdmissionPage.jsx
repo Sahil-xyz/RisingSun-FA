@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import champ from '../assets/champ.jpg'
-import award from '../assets/award.jpg'
+
 
 const AdmissionsPage = () => {
   const [admissions, setAdmissions] = useState([]);
@@ -133,7 +132,7 @@ const AdmissionsPage = () => {
   }, []);
 
   return (
-    <div className="p-8 min-h-screen bg-gradient-to-br from-gray-800 to-gray-900 text-white">
+    <div className="p-8 min-h-screen bg-gradient-to-br from-gray- to-gray-900 text-white">
       {/* Add New Admission Section */}
       <div className="mb-8 bg-gray-700 p-6 rounded-lg shadow-lg max-w-xl mx-auto">
         <h2 className="text-2xl font-semibold mb-4 text-center text-gray-100">Add New Admission</h2>

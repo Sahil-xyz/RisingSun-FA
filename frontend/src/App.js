@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "./components/Navbar/Navbar"; // Adjusted path for Navbar
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home"; // Assuming Home is located in pages
-import Login from "./pages/Login"; // Adjusted path for Login
+import Navbar from "./components/Navbar/Navbar";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Logout from "./pages/Logout";
-import Register from "./pages/Register"; // Adjusted path for Register
-import { Toaster } from "react-hot-toast"; // Toaster for notifications
+import Register from "./pages/Register";
+import { Toaster } from "react-hot-toast";
 import VerifyEmail from "./pages/VerifyEmail";
 import Profile from "./pages/Profile";
 import Footer from "./pages/Footer";
@@ -26,6 +26,9 @@ import SuccessPage from "./pages/SuccessPage";
 import FailurePage from "./pages/FailurePage";
 
 const App = () => {
+  const location = useLocation();
+  const showFooter = location.pathname !== "/login"; // Hide footer on login page
+
   return (
     <>
       <Navbar />
@@ -54,7 +57,7 @@ const App = () => {
           <Route path="/failure" element={<FailurePage />} />
         </Routes>
       </div>
-      <Footer />
+      {showFooter && <Footer />} {/* Conditionally render the footer */}
       <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );
