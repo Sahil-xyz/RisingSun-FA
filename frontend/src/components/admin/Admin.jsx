@@ -19,7 +19,7 @@ const Admin = () => {
   isAdmin ? (
     <div className="flex">
       {/* Sidebar */}
-      <div className="max-h-full bg-gray-800">
+      <div className="max-h-full min-h-screen bg-gray-800">
         <AdminSidebar />
       </div>
       {/* Main content */}
