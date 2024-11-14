@@ -4,6 +4,8 @@ const router = express.Router();
 
 router.post('/create-checkout-session', createCheckoutSession);
 router.post('/confirm-payment', confirmPayment);
+// router.post('/donate', createDonationSession);
+// router.post('/confirm-donate-payment', confirmDonatePayment);s
 
 export default router
 

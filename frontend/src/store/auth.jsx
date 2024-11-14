@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
         });
       } catch (err) {
         console.error('Invalid token or expired token');
-        logoutUser(); // Log out the user if token is invalid or expired
+        LogoutUser(); // Log out the user if token is invalid or expired
       }
     }
   }, [token]); // Re-run the effect when token changes
@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Clear token from localStorage and state
-  const logoutUser = () => {
+  const LogoutUser = () => {
     setToken(null); // Reset token in state
     setUser(null); // Reset user in state
     localStorage.removeItem('token'); // Remove token from localStorage
@@ -115,7 +115,7 @@ export const AuthProvider = ({ children }) => {
   // Token expiration check (optional)
   const checkTokenExpiration = () => {
     if (decodedToken?.exp < Date.now() / 1000) {
-      logoutUser(); // Log out if token is expired
+      LogoutUser(); // Log out if token is expired
       return false;
     }
     return true;
@@ -127,7 +127,7 @@ export const AuthProvider = ({ children }) => {
         token,
         decodedToken,
         storeTokenInLS,
-        logoutUser,
+        LogoutUser,
         isLoggedIn,
         user,
         checkTokenExpiration,  // This function can be used to check if token has expired

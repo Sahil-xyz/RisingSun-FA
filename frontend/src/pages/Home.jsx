@@ -148,12 +148,12 @@ completing his school and college education he trained to be a coach. Over the y
 participated in many tournaments including those of Mumbai Football Association (MFA) and would 
 like to give children similar opportunities.
       </p>
-      <a
-        href="#"
+      <Link
+        to="#"
         className="mt-6 inline-block text-blue-500 hover:text-blue-700 font-medium"
       >
         Know More
-      </a>
+      </Link>
     </div>
   </div>
 </div>
