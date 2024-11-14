@@ -4,15 +4,18 @@ import achievementImage2 from "../assets/ac2.jpg";
 import achievementImage3 from "../assets/ac3.jpg";
 
 
+import champ from '../assets/champ.jpg'
+import award from '../assets/award.jpg'
+import coach2 from '../assets/coach2.jpg'
 const Achievement = () => {
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-8">
+    <div className="bg-white text-black min-h-screen p-8">
       <div className="container mx-auto space-y-12">
         
         {/* Hero Section */}
         <section className="text-center">
           <h1 className="text-5xl font-bold mb-4 text-yellow-400">Our Achievements</h1>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-black max-w-3xl mx-auto">
             Celebrating the milestones and victories that define our academy's journey to excellence. Each achievement reflects the hard work, dedication, and talent of our players and coaches.
           </p>
         </section>
@@ -56,21 +59,24 @@ const Achievement = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
               <img
-                src={achievementImage1} 
+                
+                src={champ}
                 alt="Championship Win"
                 className="w-full h-64 object-cover"
               />
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
               <img
-                src={achievementImage2} 
+                
+                src={award}
                 alt="Award Ceremony"
                 className="w-full h-64 object-cover"
               />
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
               <img
-                src={achievementImage3} 
+                
+                src={coach2}
                 alt="Player in Action"
                 className="w-full h-64 object-cover"
               />

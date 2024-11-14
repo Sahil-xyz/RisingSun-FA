@@ -12,10 +12,11 @@ import coachImg from '../assets/undraw_teaching_re_g7e3(1).svg'
 import oppurnityImg from '../assets/undraw_junior_soccer_6sop(1).svg'
 import supportImg from '../assets/undraw_fans_re_cri3(1).svg'
 import facilityImg from '../assets/undraw_goal_-0-v5v(1).svg'
-import p1 from "../assets/player1.jpg";
-import leader1 from "../assets/l1.jpg";
-import leader2 from "../assets/l2.jpg";
-import leader3 from "../assets/l3.jpg";
+import one from '../assets/one.jpg'
+import two from '../assets/two.jpg'
+import three from '../assets/three.jpg'
+import homi from '../assets/home.jpg'
+
 
 
 const benefits = [
@@ -108,7 +109,7 @@ const Home = () => {
     {/* Left Side Image and Stats */}
     <div className="relative lg:w-1/2 w-full">
       {/* Overlay Box for Professional Footballers */}
-      <div className="absolute top-6 left-6 bg-blue-100 text-white text-center py-2 px-4 rounded-md z-10">
+      <div className="absolute top-6 left-6 bg-gray-400 text-white text-center py-2 px-4 rounded-md z-10">
         <p className="text-xl font-bold">230+</p>
         <p className="text-sm">Professional Footballers</p>
       </div>
@@ -116,9 +117,9 @@ const Home = () => {
       {/* Player Image */}
       <div className='w-75 rounded-md '>  
       <img
-        src={p1}
+        src={homi}
         alt="Player"
-        className="w-full h-auto object-cover" // Ensures the image is responsive and doesn't overflow
+        className="w-full h-auto object-fill" // Ensures the image is responsive and doesn't overflow
       />
        </div>
 
@@ -133,20 +134,7 @@ const Home = () => {
     <div className="lg:w-1/2 w-full p-6 lg:p-10 flex flex-col justify-center bg-gradient-to-b from-gray-50 to-white">
       <h2 className="text-3xl font-bold text-blue-700">Academy</h2>
       <p className="mt-4 text-gray-600 leading-relaxed">
-      
-The Rising Sun FA was informally started over 7 years ago in 2016 and was formally established as a 
-NGO in 2021 with the objective to promote learning and development of life skills among 
-underprivileged children by giving them access to organized sports. Originally started with 7 players, 
-we now help more than 147 kids.
-The academy was started by Vijay Gupta – a qualified and licensed (D License) coach based out of 
-Mumbai, India. He has been coaching for the last 9 years and his vision is to give every child 
-irrespective of prejudice or privilege a chance to grow and develop through sports.
-Vijay was introduced to organized sports at the age of 9 through Magic Bus (an NGO) where he 
-developed his passion for sports. Through that program among other things, Vijay learned about the 
-importance of organized sports in promoting learning and development among children. So, after 
-completing his school and college education he trained to be a coach. Over the years he has played and 
-participated in many tournaments including those of Mumbai Football Association (MFA) and would 
-like to give children similar opportunities.
+      we are passionate about shaping future champions. Our academy is dedicated to training, inspiring, and nurturing young talent to excel both on and off the field. With top-notch coaches, world-class facilities, and a rich legacy in football excellence, we offer a holistic approach to player development. Join us and be part of a team where dreams take flight and potential turns into performance.
       </p>
       <Link
         to="#"
@@ -165,19 +153,19 @@ like to give children similar opportunities.
     </div>
 
     {/* Scrollable container for leader cards */}
-    <div className="overflow-x-auto flex space-x-8 pb-4" >
+    <div className="overflow-x-auto flex justify-center space-x-8 pb-4" >
       
       {/* First Leader Card */}
       <div className="min-w-[300px] bg-white shadow-lg rounded-xl p-6 relative flex-shrink-0">
         <div className="flex flex-col items-center">
           <img
-            src={leader1} // Replace with another image source
+            src={one}
             alt="Leader"
             className="rounded-full w-32 h-32 mb-4"
           />
           <h2 className="text-xl font-semibold">Leader Name 1</h2>
           <p className="text-gray-600 text-center mt-2">
-            Short description of the leader’s message or background.
+            2019 Finalist Football league
           </p>
         </div>
       </div>
@@ -186,13 +174,13 @@ like to give children similar opportunities.
       <div className="min-w-[300px] bg-white shadow-lg rounded-xl p-6 relative flex-shrink-0">
         <div className="flex flex-col items-center">
           <img
-            src={leader2} // Replace with another image source
+            src={two}
             alt="Leader"
             className="rounded-full w-32 h-32 mb-4"
           />
           <h2 className="text-xl font-semibold">Leader Name 2</h2>
           <p className="text-gray-600 text-center mt-2">
-            Short description of the leader’s message or background.
+            Khelo  India  Runner  Up  Goal  keeper
           </p>
         </div>
       </div>
@@ -201,13 +189,13 @@ like to give children similar opportunities.
       <div className="min-w-[300px] bg-white shadow-lg rounded-xl p-6 relative flex-shrink-0">
         <div className="flex flex-col items-center">
           <img
-            src={leader3} // Replace with another image source
+            src={three}
             alt="Leader"
             className="rounded-full w-32 h-32 mb-4"
           />
           <h2 className="text-xl font-semibold">Leader Name 3</h2>
           <p className="text-gray-600 text-center mt-2">
-            Short description of the leader’s message or background.
+            9+year of National Team Experience
           </p>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+
 const AdmissionsPage = () => {
   const [admissions, setAdmissions] = useState([]);
   const [filteredAdmissions, setFilteredAdmissions] = useState([]);
@@ -13,7 +14,6 @@ const AdmissionsPage = () => {
     mode: 'Offline',
   });
   const [searchQuery, setSearchQuery] = useState('');
-  const [editingAdmission, setEditingAdmission] = useState(null); // For Edit functionality
 
   // Fetch admissions from the backend
   const fetchAdmissions = async () => {
@@ -29,15 +29,23 @@ const AdmissionsPage = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
+  
+      console.log('API response:', response);  // Log the response object
+  
       if (Array.isArray(response.data)) {
         setAdmissions(response.data);
         setFilteredAdmissions(response.data.slice(0, 5));
       } else if (response.data && response.data.data) {
-        setAdmissions(response.data.data || []);
-        setFilteredAdmissions(response.data.data.slice(0, 5));
+        // If the data is nested inside a 'data' key
+        setAdmissions(Array.isArray(response.data.data) ? response.data.data : []);
+        setFilteredAdmissions((Array.isArray(response.data.data) ? response.data.data : []).slice(0, 5));
+      } else {
+        setAdmissions([]);
+        setFilteredAdmissions([]);
+        console.error('Expected array but got:', response.data);
       }
     } catch (error) {
+      console.error('Error fetching admissions:', error);
       toast.error("Failed to fetch admissions");
     }
   };
@@ -82,6 +90,7 @@ const AdmissionsPage = () => {
 
       toast.success("Admission added successfully");
     } catch (error) {
+      console.error('Error adding admission:', error);
       toast.error("Failed to add admission");
     }
   };
@@ -95,7 +104,7 @@ const AdmissionsPage = () => {
         return;
       }
 
-      await axios.delete(`http://localhost:8000/api/v1/admin/admission/${id}`, {
+      const response = await axios.delete(`http://localhost:8000/api/v1/admin/admission/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -106,58 +115,16 @@ const AdmissionsPage = () => {
 
       toast.success("Admission deleted successfully");
     } catch (error) {
+      console.error('Error deleting admission:', error);
       toast.error("Failed to delete admission");
     }
   };
 
-  // Handle editing an admission
-  const handleEditAdmission = (admission) => {
-    setEditingAdmission(admission);
-    setNewAdmission({
-      name: admission.name,
-      dateOfBirth: admission.dateOfBirth,
-      gender: admission.gender,
-      role: admission.role,
-      mode: admission.mode,
-    });
-  };
-
-  // Handle updating an admission
-  const handleUpdateAdmission = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        toast.error("Authentication required");
-        return;
-      }
-
-      const response = await axios.put(`http://localhost:8000/api/v1/admin/admission/${editingAdmission._id}`, newAdmission, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      // Update the admission in the local state
-      setAdmissions(admissions.map(admission => 
-        admission._id === editingAdmission._id ? response.data.admission : admission
-      ));
-      setFilteredAdmissions(filteredAdmissions.map(admission =>
-        admission._id === editingAdmission._id ? response.data.admission : admission
-      ));
-
-      setEditingAdmission(null);
-      setNewAdmission({
-        name: '',
-        dateOfBirth: '',
-        gender: 'Male',
-        role: 'Striker',
-        mode: 'Offline',
-      });
-
-      toast.success("Admission updated successfully");
-    } catch (error) {
-      toast.error("Failed to update admission");
-    }
+  // Handle editing an admission (for now just log the admission)
+  const handleEditAdmission = (id) => {
+    const admissionToEdit = admissions.find(admission => admission._id === id);
+    console.log('Editing Admission:', admissionToEdit);
+    // You can implement the edit logic as required (e.g., show a modal to update the details)
   };
 
   useEffect(() => {
@@ -165,12 +132,10 @@ const AdmissionsPage = () => {
   }, []);
 
   return (
-    <div className="p-8 min-h-screen bg-gradient-to-br from-gray-800 to-gray-900 text-white">
-      {/* Add or Edit Admission Section */}
+    <div className="p-8 min-h-screen bg-gradient-to-br from-gray- to-gray-900 text-white">
+      {/* Add New Admission Section */}
       <div className="mb-8 bg-gray-700 p-6 rounded-lg shadow-lg max-w-xl mx-auto">
-        <h2 className="text-2xl font-semibold mb-4 text-center text-gray-100">
-          {editingAdmission ? 'Edit Admission' : 'Add New Admission'}
-        </h2>
+        <h2 className="text-2xl font-semibold mb-4 text-center text-gray-100">Add New Admission</h2>
         <div className="space-y-4">
           <input
             type="text"
@@ -213,10 +178,10 @@ const AdmissionsPage = () => {
             <option value="Online">Online</option>
           </select>
           <button
-            onClick={editingAdmission ? handleUpdateAdmission : handleAddAdmission}
+            onClick={handleAddAdmission}
             className="w-full bg-blue-600 hover:bg-blue-500 p-3 rounded-lg text-white font-semibold transition duration-300 ease-in-out"
           >
-            {editingAdmission ? 'Update Admission' : 'Add Admission'}
+            Add Admission
           </button>
         </div>
       </div>
@@ -237,15 +202,15 @@ const AdmissionsPage = () => {
         <h3 className="text-2xl font-semibold mb-4 text-center text-gray-100">Admissions List</h3>
         <ul className="space-y-4">
           {filteredAdmissions.length > 0 ? (
-            filteredAdmissions.map((admission) => (
-              <li key={admission._id} className="p-4 bg-gray-800 rounded-lg shadow-md">
+            filteredAdmissions.map((admission, index) => (
+              <li key={index} className="p-4 bg-gray-800 rounded-lg shadow-md">
                 <p className="text-lg font-medium text-blue-400"><strong>Name:</strong> {admission.name}</p>
                 <p className="text-md text-gray-300"><strong>Gender:</strong> {admission.gender}</p>
                 <p className="text-md text-gray-300"><strong>Role:</strong> {admission.role}</p>
                 <p className="text-md text-gray-300"><strong>Mode:</strong> {admission.mode}</p>
                 <div className="flex justify-between mt-4">
                   <button
-                    onClick={() => handleEditAdmission(admission)}
+                    onClick={() => handleEditAdmission(admission._id)}
                     className="bg-yellow-600 hover:bg-yellow-500 p-2 rounded-lg text-white font-semibold transition duration-300 ease-in-out"
                   >
                     Edit

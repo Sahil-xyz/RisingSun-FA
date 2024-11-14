@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
+import practice1 from '../assets/practice1.jpg'
+import practice2 from '../assets/practice2.jpg'
+import practice3 from '../assets/practice3.jpg'
+import play3 from '../assets/play3.jpg'
+import train2 from '../assets/train2.jpg'
+import goalkeep from '../assets/goalkeep.jpg'
+import team from'../assets/team.jpg'
+import mainTeamimage from '../assets/mainTeamImage.jpg'
+import A5 from '../assets/A5.jpg'
+import lea1 from '../assets/lea1.jpg'
+import lea2 from '../assets/lea2.jpg'
+import lea3 from '../assets/lea3.jpg'
 
 const Gallery = () => {
   const [activeTab, setActiveTab] = useState('practice');
 
   // Sample images for each category (replace with actual images)
   const galleryImages = {
-    practice: ['/images/practice1.jpg', '/images/practice2.jpg', '/images/practice3.jpg'],
-    training: ['/images/training1.jpg', '/images/training2.jpg', '/images/training3.jpg'],
-    team: ['/images/team1.jpg', '/images/team2.jpg', '/images/team3.jpg'],
-    league: ['/images/league1.jpg', '/images/league2.jpg', '/images/league3.jpg'],
+    practice: [practice1, practice2,practice3],
+    training: [play3, train2, goalkeep],
+    team: [team, mainTeamimage, A5],
+    league: [lea1, lea2,lea3],
   };
 
   return (
