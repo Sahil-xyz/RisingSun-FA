@@ -24,7 +24,7 @@ const AdmissionsPage = () => {
         return;
       }
   
-      const response = await axios.get('http://localhost:8000/api/v1/admin/admission', {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}api/v1/admin/admission`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -71,7 +71,7 @@ const AdmissionsPage = () => {
         return;
       }
 
-      const response = await axios.post('http://localhost:8000/api/v1/admin/admission', newAdmission, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}api/v1/admin/admission`, newAdmission, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

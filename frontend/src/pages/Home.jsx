@@ -63,13 +63,13 @@ const Home = () => {
 
       {/* Content on top of the gradient */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full">
-        <h1 className="text-white text-7xl font-bold font-yatra shadow-white stroke-blue-700 stroke-2">Rising Sun <span className='text-red-200'>FA</span></h1>
+        <h1 className="text-white md:text-7xl text-5xl font-bold font-yatra shadow-white stroke-blue-700 stroke-2 flex flex-col justify-center items-center"><span>Rising Sun </span><span className='text-red-200'>Football Academy</span></h1>
         <p className="text-white py-4">
         Unlock your potential with top-tier training and expert coaching.<br/>Elevate your game and chase your football dreams with us.
         </p>
         {
           isLoggedIn?(
-            <Link to="/join" className="rounded-full bg-yellow-50 text-black py-3 px-6 font-semibold flex items-center">
+            <Link to="/online-admission" className="rounded-full bg-yellow-50 text-black py-3 px-6 font-semibold flex items-center">
               Join Now <MdOutlineArrowOutward className="ml-2" />
             </Link>
           ) : (

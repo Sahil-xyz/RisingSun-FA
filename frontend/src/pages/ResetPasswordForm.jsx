@@ -10,7 +10,7 @@ function ResetPassword() {
     const handleResetPassword = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:8000/api/v1/user/reset-password/${token}`, { newPassword });
+            const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}api/v1/user/reset-password/${token}`, { newPassword });
             setMessage(response.data.message);
         } catch (error) {
             setMessage('Error resetting password');

@@ -66,7 +66,7 @@
 
 
 import mongoose from 'mongoose';
-import Payment from '../models/payment.model.js';
+import  Payment from '../models/payment.model.js';
 import {User } from '../models/user-model.js'; // Assuming you have a User model
 import Stripe from 'stripe';
 import { Admission } from '../models/admission-model.js'
@@ -189,30 +189,30 @@ export async function createCheckoutSession(req, res, next) {
 
 
 
-
 export async function confirmPayment(req, res) {
   const { paymentId, status, admissionDetails } = req.body;
 
   if (!paymentId || !status || !admissionDetails) {
+    console.error("Missing required fields in request body.");
     return res.status(400).json({ error: 'PaymentId, status, and admissionDetails are required.' });
   }
 
   try {
-    // Find the payment record
+    console.log("Attempting to find payment with ID:", paymentId);
     const payment = await Payment.findById(paymentId);
     if (!payment) {
+      console.error("Payment not found for ID:", paymentId);
       return res.status(404).json({ error: 'Payment not found.' });
     }
 
-    // Update the payment status
+    console.log("Updating payment status to:", status);
     payment.status = status;
     await payment.save();
 
-    // If payment is successful, create the admission record
     if (status === 'completed') {
+      console.log("Creating admission record with details:", admissionDetails);
       const newAdmission = new Admission({
         ...admissionDetails,
-        // Associate the payment with the admission (optional)
         payment: payment._id,
         dateOfAdmission: new Date(),
       });
@@ -221,10 +221,11 @@ export async function confirmPayment(req, res) {
 
     res.status(200).json({ message: 'Payment status updated and admission created successfully.' });
   } catch (error) {
-    console.error('Error confirming payment:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error("Error confirming payment:", error.message);
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 }
+
 
 // export async function confirmPayment(req, res, next) {
 //   const { paymentId, status } = req.body;

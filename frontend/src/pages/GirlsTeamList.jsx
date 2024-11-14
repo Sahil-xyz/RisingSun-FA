@@ -11,7 +11,7 @@ const BoysTeamList = () => {
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/user/teams/girls');
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}api/v1/user/teams/girls`);
         setTeams(response.data.data);
         setSelectedTeam(response.data.data[0]); // Default to the first team
         setLoading(false);

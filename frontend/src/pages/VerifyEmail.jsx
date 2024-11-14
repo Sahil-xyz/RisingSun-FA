@@ -37,7 +37,7 @@ const VerifyEmail = () => {
     const otpCode = otp.join("");
 
     try {
-      const response = await axios.post("http://localhost:8000/api/v1/user/verifyEmail", { code: otpCode });
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}api/v1/user/verifyEmail`, { code: otpCode });
 
       if (response.data.success) {
         navigate("/login");

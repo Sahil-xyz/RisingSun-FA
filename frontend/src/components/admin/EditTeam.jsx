@@ -26,7 +26,7 @@ const EditTeam = () => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:8000/api/v1/admin/teams/${id}`, {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}api/v1/admin/teams/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

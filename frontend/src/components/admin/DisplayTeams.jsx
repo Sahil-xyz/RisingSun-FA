@@ -21,7 +21,7 @@ const DisplayTeams = () => {
         }
 
         const response = await axios.get(
-          "http://localhost:8000/api/v1/admin/teams",
+          `${process.env.REACT_APP_BACKEND_URL}api/v1/admin/teams`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

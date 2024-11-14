@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import RegisterImage from '../assets/registerImage-min.png'
 
 // Backend registration route
-export const USER_API_END_POINT = "http://localhost:8000/api/v1/user/register";
+export const USER_API_END_POINT = `${process.env.REACT_APP_BACKEND_URL}api/v1/user/register`;
 
 const Register = () => {
   const [user, setUser] = useState({

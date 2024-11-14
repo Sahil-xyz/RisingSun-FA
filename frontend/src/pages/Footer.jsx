@@ -24,7 +24,7 @@ const Footer = () => {
                 <a href="/" className="text-gray-300 hover:text-blue-400 transition duration-300">Home</a>
               </li>
               <li>
-                <a href="/history" className="text-gray-300 hover:text-blue-400 transition duration-300">About Us</a>
+                <a href="/donate" className="text-gray-300 hover:text-blue-400 transition duration-300">Donate</a>
               </li>
               <li>
                 <a href="/coaches" className="text-gray-300 hover:text-blue-400 transition duration-300">Coach And Staff</a>
