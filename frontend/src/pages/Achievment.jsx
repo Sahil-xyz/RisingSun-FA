@@ -1,4 +1,8 @@
 import React from "react";
+import achievementImage1 from "../assets/ac1.jpg";
+import achievementImage2 from "../assets/ac2.jpg";
+import achievementImage3 from "../assets/ac3.jpg";
+
 
 const Achievement = () => {
   return (
@@ -52,21 +56,21 @@ const Achievement = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
               <img
-                src="/images/achievement-1.jpg"
+                src={achievementImage1} 
                 alt="Championship Win"
                 className="w-full h-64 object-cover"
               />
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
               <img
-                src="/images/achievement-2.jpg"
+                src={achievementImage2} 
                 alt="Award Ceremony"
                 className="w-full h-64 object-cover"
               />
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
               <img
-                src="/images/achievement-3.jpg"
+                src={achievementImage3} 
                 alt="Player in Action"
                 className="w-full h-64 object-cover"
               />
