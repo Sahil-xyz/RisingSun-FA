@@ -7,7 +7,7 @@ import {
   sendWelcomeEmail,
   sendForgotPasswordEmail,
 } from "../utils/email.js";
-import { generateTokenAndSetCookies } from "../utils/generateEmailcode.js";
+import { generateTokenAndSetCookies } from "../utils/generateEmailCode.js";
 import jwt from "jsonwebtoken";
 
 export const home = async (req, res) => {
