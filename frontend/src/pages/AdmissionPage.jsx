@@ -104,7 +104,7 @@ const AdmissionsPage = () => {
         return;
       }
 
-      const response = await axios.delete(`http://localhost:8000/api/v1/admin/admission/${id}`, {
+      const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}api/v1/admin/admission/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

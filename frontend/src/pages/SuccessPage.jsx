@@ -15,7 +15,7 @@ const SuccessPage = () => {
   useEffect(() => {
     const updatePaymentStatus = async () => {
       try {
-        await axios.post('http://localhost:8000/api/v1/payment/confirm-payment', {
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}api/v1/payment/confirm-payment`, {
           paymentId,
           status: 'completed',
           admissionDetails: {       

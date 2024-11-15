@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 // import { useGoogleLogin } from "@react-oauth/google";
 import loginImage from '../assets/loginImage-min.png'
 
-export const USER_API_END_POINT = "http://localhost:8000/api/v1/user/login";
+export const USER_API_END_POINT = `${process.env.REACT_APP_BACKEND_URL}api/v1/user/login`;
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });

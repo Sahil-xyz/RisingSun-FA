@@ -56,7 +56,7 @@ const EditTeam = () => {
         return;
       }
 
-      const response = await axios.get(`http://localhost:8000/api/v1/admin/admission?name=${searchTerm}`, {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}api/v1/admin/admission?name=${searchTerm}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -83,7 +83,7 @@ const EditTeam = () => {
         return;
       }
 
-      await axios.put(`http://localhost:8000/api/v1/admin/teams/${id}`, {
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}api/v1/admin/teams/${id}`, {
         ...teamData,
         admissions: teamData.players,
       }, {

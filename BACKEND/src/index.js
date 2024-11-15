@@ -18,9 +18,9 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: process.env.REACT_APP_BACKEND_URL || 'http://localhost:3000', // Fallback to localhost for development
     credentials: true
-}
+};
 app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 4000;
