@@ -106,7 +106,7 @@ const Navbar = () => {
   {dropdowns.about && (
     <div className="pl-6 space-y-4 flex flex-col ml-15 mt-4">
       <Link to="/history" className="text-sm" onClick={toggleMenu}>History</Link>
-      <Link to="/achievements" className="text-sm" onClick={toggleMenu}>Achievements</Link>
+      <Link to="/achievement" className="text-sm" onClick={toggleMenu}>Achievements</Link>
       <Link to="/vision" className="text-sm" onClick={toggleMenu}>Vision</Link>
     </div>
   )}

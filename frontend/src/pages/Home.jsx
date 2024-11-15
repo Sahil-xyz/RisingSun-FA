@@ -59,11 +59,14 @@ const Home = () => {
       style={{ backgroundImage: `url(${homeImage})`}}
     >
       {/* Black gradient overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-55 z-0"></div>
+  <div className="absolute inset-0 bg-black bg-opacity-55 z-0"></div>
 
-      {/* Content on top of the gradient */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full">
-        <h1 className="text-white md:text-7xl text-5xl font-bold font-yatra shadow-white stroke-blue-700 stroke-2 flex flex-col justify-center items-center"><span>Rising Sun </span><span className='text-red-200'>Football Academy</span></h1>
+{/* Content on top of the gradient */}
+<div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center">
+  <h1 className="text-white text-4xl sm:text-5xl md:text-7xl font-bold font-yatra shadow-white stroke-blue-700 stroke-2 flex flex-col items-center">
+    <span>Rising Sun</span>
+    <span className="text-red-200">Football Academy</span>
+  </h1>
         <p className="text-white py-4">
         Unlock your potential with top-tier training and expert coaching.<br/>Elevate your game and chase your football dreams with us.
         </p>
