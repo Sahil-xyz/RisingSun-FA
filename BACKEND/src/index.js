@@ -17,11 +17,23 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
+const allowedOrigins = [
+    process.env.FRONTEND_URL || 'http://localhost:3000',
+    'https://rising-sun-fa.vercel.app'  // Add your production frontend URL here
+];
+
 const corsOptions = {
-    origin: process.env.REACT_APP_BACKEND_URL || 'http://localhost:3000', // Fallback to localhost for development
+    origin: function (origin, callback) {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 };
-app.use(cors(corsOptions));
+
+app.use(cors(corsOptions));;
 
 const PORT = process.env.PORT || 4000;
 
