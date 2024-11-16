@@ -8,6 +8,7 @@ import ContactContent from "./ContactContent";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";  // Import icons
 import { Link } from "react-router-dom";
 import { useAuth } from "../../store/auth";
+import { CgProfile } from "react-icons/cg"
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,8 +58,8 @@ const Navbar = () => {
         <div className="hidden md:block">
           {isLoggedIn ? (
             <Link to="/profile">
-              <button className="rounded-full bg-slate-400 px-4 py-2 text-sm md:px-6 md:py-2 font-semibold text-black hover:bg-slate-300">
-                Profile
+              <button className="rounded-full px-4 py-2 text-lg md:px-6 font-semibold text-black hover:bg-slate-300 flex items-center ">
+                <CgProfile className="mr-2"/>Profile
               </button>
             </Link>
           ) : (
@@ -170,8 +171,8 @@ const Navbar = () => {
           {/* Mobile Login Button */}
           {isLoggedIn ? (
             <Link to="/profile">
-              <button className="rounded-sm bg-[#FFD700] px-6 py-2 font-semibold text-black hover:bg-[#B5D53E]" onClick={toggleMenu}>
-                Profile
+              <button className="rounded-sm bg-[#FFD700] px-6 py-2 font-semibold text-black hover:bg-[#B5D53E] flex justify-center items-center" onClick={toggleMenu}>
+              <CgProfile className="mr-2"/>Profile
               </button>
             </Link>
           ) : (

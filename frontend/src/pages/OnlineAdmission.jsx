@@ -41,7 +41,8 @@ const OnlineAdmission = () => {
       const stripe = window.Stripe('pk_test_51Q56EjEP7o2kKrafWnt7eZnbAvY2hx1dyG97UlD8dcLoMUjOcHRx8JGSiReNZIaa9WwSvD6HuvgpCa9SOSJQLgPr00THRW3Bnb');
       await stripe.redirectToCheckout({ sessionId });
     } catch (error) {
-      console.error('Error initiating payment:', error);
+      console.error('Error initiating payment:', error.response?.data || error.message);
+    alert('Payment initiation failed, please try again.');
     }
 
     setLoading(false);

@@ -27,7 +27,8 @@ import FailurePage from "./pages/FailurePage";
 
 const App = () => {
   const location = useLocation();
-  const showFooter = location.pathname !== "/login"; // Hide footer on login page
+  const showFooter = !['/login', '/register', '/verifyemail','/forget-password','/profile',''].includes(location.pathname);
+ // Hide footer on login page
 
   return (
     <>
