@@ -75,7 +75,7 @@ const Login = () => {
     <div className="flex items-center font-roboto justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: `url(${loginImage})` }}>
       <div className="flex items-center sm:flex-row  md:w-3/4 bg-white bg-opacity-50 rounded-2xl border-2 border-white shadow-2xl p-8 sm:p-12 backdrop-blur-sm justify-center ml-12">
         
-        <div className="w-full sm:w-1/2">
+        <div className="w-screen sm:w-1/2">
           <div className="flex justify-center items-center mb-8">
             <div className="text-3xl font-bold text-red-500">Rising Sun Football Academy</div>
           </div>
