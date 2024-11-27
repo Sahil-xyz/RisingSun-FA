@@ -1,4 +1,3 @@
-// src/components/DisplayTeams.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -6,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const DisplayTeams = () => {
-  const [teams, setTeams] = useState([]); // Initialize as an empty array
+  const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [expandedTeamId, setExpandedTeamId] = useState(null); // Track expanded team
+  const [expandedTeamId, setExpandedTeamId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +28,7 @@ const DisplayTeams = () => {
           }
         );
 
-        setTeams(response.data.data || []); // Access the correct data structure
+        setTeams(response.data.data || []);
       } catch (error) {
         console.error("Error fetching teams:", error);
         toast.error("Failed to load teams.");
@@ -42,89 +41,109 @@ const DisplayTeams = () => {
   }, []);
 
   const toggleTeamDetails = (id) => {
-    setExpandedTeamId((prevId) => (prevId === id ? null : id)); // Toggle team details
+    setExpandedTeamId((prevId) => (prevId === id ? null : id));
   };
 
   const handleEditClick = (teamId) => {
-    navigate(`/admin/teams/${teamId}`); // Redirect to edit page
+    navigate(`/admin/teams/${teamId}`);
   };
 
-  if (loading) return <p>Loading teams...</p>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-lg font-semibold text-gray-500">Loading teams...</p>
+      </div>
+    );
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded">
-      <h2 className="text-2xl font-semibold mb-4">Teams</h2>
+    <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+      <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+        Manage Teams
+      </h2>
       {teams.length === 0 ? (
-        <p>No teams available.</p>
+        <p className="text-center text-gray-600">No teams available.</p>
       ) : (
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {teams.map((team) => (
-            <div key={team._id} className="border-b pb-4">
-              {/* Team Name with click handler to toggle details */}
-              <h3
-                className="text-lg font-bold cursor-pointer hover:underline"
+            <div
+              key={team._id}
+              className="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div
+                className="flex justify-between items-center cursor-pointer"
                 onClick={() => toggleTeamDetails(team._id)}
               >
-                {team.name}
-              </h3>
+                <h3 className="text-xl font-semibold text-gray-700">
+                  {team.name}
+                </h3>
+                <span className="text-gray-500">
+                  {expandedTeamId === team._id ? "▲" : "▼"}
+                </span>
+              </div>
 
-              {/* Conditionally display team details */}
               {expandedTeamId === team._id && (
-                <div className="mt-2 bg-gray-100 p-4 rounded shadow">
-                  <p>
-                    <strong>Coach:</strong> {team.coach}
-                  </p>
-                  <p>
-                    <strong>Formation:</strong> {team.formation}
-                  </p>
-                  <div>
-                    <h4 className="font-semibold">Achievements:</h4>
-                    <ul className="list-disc list-inside">
-                      {team.achievements && team.achievements.length > 0 ? (
-                        team.achievements.map((achievement, i) => (
-                          <li key={i} className="mt-1">
-                            <p>
-                              <strong>Title:</strong> {achievement.title}
-                            </p>
-                            <p>
-                              <strong>Year:</strong> {achievement.year}
-                            </p>
-                            <p>
-                              <strong>Description:</strong>{" "}
-                              {achievement.description}
-                            </p>
-                          </li>
-                        ))
-                      ) : (
-                        <p>No achievements listed.</p>
-                      )}
-                    </ul>
-                  </div>
-                  <div className="mt-2">
+                <div className="mt-4">
+                  <div className="bg-gray-50 p-4 rounded-lg">
                     <p>
-                      <strong>Display on Frontend:</strong>{" "}
-                      {team.display ? "Yes" : "No"}
+                      <strong>Coach:</strong> {team.coach}
                     </p>
+                    <p>
+                      <strong>Formation:</strong> {team.formation}
+                    </p>
+                    <div className="mt-3">
+                      <h4 className="font-semibold text-gray-700">
+                        Achievements:
+                      </h4>
+                      <ul className="list-disc list-inside text-gray-600">
+                        {team.achievements && team.achievements.length > 0 ? (
+                          team.achievements.map((achievement, i) => (
+                            <li key={i} className="mt-2">
+                              <p>
+                                <strong>Title:</strong> {achievement.title}
+                              </p>
+                              <p>
+                                <strong>Year:</strong> {achievement.year}
+                              </p>
+                              <p>
+                                <strong>Description:</strong>{" "}
+                                {achievement.description}
+                              </p>
+                            </li>
+                          ))
+                        ) : (
+                          <p className="text-sm text-gray-500">
+                            No achievements listed.
+                          </p>
+                        )}
+                      </ul>
+                    </div>
+                    <div className="mt-3">
+                      <p>
+                        <strong>Display on Frontend:</strong>{" "}
+                        {team.display ? "Yes" : "No"}
+                      </p>
+                    </div>
                   </div>
-                  {/* Edit Button */}
-                  <button
-                    className="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                    onClick={() => handleEditClick(team._id)}
-                  >
-                    Edit
-                  </button>
+                  <div className="mt-4 flex justify-end">
+                    <button
+                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-200"
+                      onClick={() => handleEditClick(team._id)}
+                    >
+                      Edit Team
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
           ))}
         </div>
       )}
-      <div className="flex justify-end m-4">
+      <div className="flex justify-end mt-8">
         <Link
           to="/admin/teams/create-team"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow focus:outline-none focus:ring focus:ring-green-300"
         >
-          New Team
+          + Create New Team
         </Link>
       </div>
     </div>

@@ -24,43 +24,48 @@ import Gallery from "./pages/Gallery";
 import OnlineAdmission from "./pages/OnlineAdmission";
 import SuccessPage from "./pages/SuccessPage";
 import FailurePage from "./pages/FailurePage";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const App = () => {
   const location = useLocation();
-  const showFooter = !['/login', '/register', '/verifyemail','/forget-password','/profile',''].includes(location.pathname);
- // Hide footer on login page
+  
+  // Show footer only for non-login, non-register, and non-profile routes
+  const showFooter = !['/login', '/register', '/verify', '/forget-password', '/profile'].includes(location.pathname);
 
   return (
-    <>
-      <Navbar />
-      <div className="pt-20">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/verify" element={<VerifyEmail />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/forget-password" element={<ForgotPasswordForm />} />
-          <Route path="/reset-password/:token" element={<ResetPasswordForm />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/coaches" element={<Coaches />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/achievement" element={<Achievement />} />
-          <Route path="/vision" element={<Vision />} />
-          <Route path="/location" element={<Location />} />
-          <Route path="/support" element={<Support />} />
-          <Route path="/donate" element={<DonatePage />} />
-          <Route path="/boys" element={<BoysTeamList />} />
-          <Route path="/girls" element={<GirlsTeamList />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/online-admission" element={<OnlineAdmission />} />
-          <Route path="/success" element={<SuccessPage />} />
-          <Route path="/failure" element={<FailurePage />} />
-        </Routes>
-      </div>
-      {showFooter && <Footer />} {/* Conditionally render the footer */}
-      <Toaster position="bottom-right" reverseOrder={false} />
-    </>
+    // Wrap the entire app with GoogleOAuthProvider
+    <GoogleOAuthProvider clientId="329259969830-jk0ekn0tmfsehdglmgic6m59ncbusb3e.apps.googleusercontent.com">
+      <>
+        <Navbar />
+        <div className="pt-20">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/verify" element={<VerifyEmail />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/forget-password" element={<ForgotPasswordForm />} />
+            <Route path="/reset-password/:token" element={<ResetPasswordForm />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/coaches" element={<Coaches />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/achievement" element={<Achievement />} />
+            <Route path="/vision" element={<Vision />} />
+            <Route path="/location" element={<Location />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/donate" element={<DonatePage />} />
+            <Route path="/boys" element={<BoysTeamList />} />
+            <Route path="/girls" element={<GirlsTeamList />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/online-admission" element={<OnlineAdmission />} />
+            <Route path="/success" element={<SuccessPage />} />
+            <Route path="/failure" element={<FailurePage />} />
+          </Routes>
+        </div>
+        {showFooter && <Footer />} {/* Conditionally render the footer */}
+        <Toaster position="bottom-right" reverseOrder={false} />
+      </>
+    </GoogleOAuthProvider>
   );
 };
 

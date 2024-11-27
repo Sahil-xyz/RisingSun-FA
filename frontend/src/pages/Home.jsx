@@ -16,6 +16,7 @@ import one from "../assets/one.jpg";
 import two from "../assets/two.jpg";
 import three from "../assets/three.jpg";
 import homi from "../assets/home.jpg";
+import toast from "react-hot-toast";
 
 const benefits = [
   {
@@ -52,6 +53,10 @@ const Home = () => {
     });
   }, []);
 
+  const LoginRequired = () => {
+    toast.error("Login Required")
+  }
+
   return (
     <>
       {/* Home Page */}
@@ -64,9 +69,9 @@ const Home = () => {
 
         {/* Content on top of the gradient */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center">
-          <h1 className="text-white text-4xl sm:text-5xl md:text-7xl font-bold font-yatra shadow-white stroke-blue-700 stroke-2 flex flex-col items-center">
+          <h1 className="text-white text-4xl sm:text-5xl md:text-7xl font-bold font-ptsans shadow-white stroke-blue-700 stroke-2 flex flex-col items-center">
             <span>Rising Sun</span>
-            <span className="text-red-200">Football Academy</span>
+            <span className="bg-gradient-to-b from-red-100 to-red-300 bg-clip-text text-transparent">Football Academy</span>
           </h1>
           <p className="text-white py-4">
             Unlock your potential with top-tier training and expert coaching.
@@ -76,16 +81,17 @@ const Home = () => {
           {isLoggedIn ? (
             <Link
               to="/online-admission"
-              className="rounded-full bg-yellow-50 text-black py-3 px-6 font-semibold flex items-center"
+              className="rounded-full bg-yellow-50 text-black py-3 px-6 pr-3 font-semibold flex items-center"
             >
-              Join Now <MdOutlineArrowOutward className="ml-2" />
+              <p>Join Now</p> <MdOutlineArrowOutward className="ml-2" />
             </Link>
           ) : (
             <Link
               to="/login"
-              className="rounded-full bg-yellow-50 text-black py-3 px-6 font-semibold flex items-center"
+              className="rounded-full bg-yellow-50 text-black py-3 px-6 pr-4 font-semibold flex items-center"
+              onClick={LoginRequired}
             >
-              Join Now <MdOutlineArrowOutward className="ml-2" />
+              <p>Join Now</p> <MdOutlineArrowOutward className="ml-2" />
             </Link>
           )}
         </div>
@@ -181,7 +187,7 @@ const Home = () => {
                     alt="Leader"
                     className="rounded-full w-32 h-32 mb-4"
                   />
-                  <h2 className="text-xl font-semibold">Leader Name 1</h2>
+                  <h2 className="text-xl font-semibold">Vice President</h2>
                   <p className="text-gray-600 text-center mt-2">
                     2019 Finalist Football league
                   </p>
@@ -196,9 +202,9 @@ const Home = () => {
                     alt="Leader"
                     className="rounded-full w-32 h-32 mb-4"
                   />
-                  <h2 className="text-xl font-semibold">Leader Name 2</h2>
+                  <h2 className="text-xl font-semibold">Head Coach</h2>
                   <p className="text-gray-600 text-center mt-2">
-                    Khelo India Runner Up Goal keeper
+                    Most Experienced Person in academy
                   </p>
                 </div>
               </div>
@@ -211,7 +217,7 @@ const Home = () => {
                     alt="Leader"
                     className="rounded-full w-32 h-32 mb-4"
                   />
-                  <h2 className="text-xl font-semibold">Leader Name 3</h2>
+                  <h2 className="text-xl font-semibold">President</h2>
                   <p className="text-gray-600 text-center mt-2">
                     9+year of National Team Experience
                   </p>

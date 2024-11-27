@@ -6,11 +6,12 @@ import { useLocation } from 'react-router-dom';
 const SuccessPage = () => {
   const location = useLocation();
   const paymentId = new URLSearchParams(location.search).get('paymentId');
-  const name = new URLSearchParams(location.search).get('name');
-  const gender = new URLSearchParams(location.search).get('gender');
-  const role = new URLSearchParams(location.search).get('role');
-  const mode = new URLSearchParams(location.search).get('mode');
-  const dateOfBirth = new URLSearchParams(location.search).get('dateOfBirth');
+  const name = decodeURIComponent(new URLSearchParams(location.search).get('name') || '');
+const gender = decodeURIComponent(new URLSearchParams(location.search).get('gender') || '');
+const role = decodeURIComponent(new URLSearchParams(location.search).get('role') || '');
+const mode = decodeURIComponent(new URLSearchParams(location.search).get('mode') || '');
+const dateOfBirth = decodeURIComponent(new URLSearchParams(location.search).get('dateOfBirth') || '');
+
 
   useEffect(() => {
     const updatePaymentStatus = async () => {

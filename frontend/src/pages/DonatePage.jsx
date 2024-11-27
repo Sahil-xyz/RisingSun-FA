@@ -49,8 +49,8 @@ const DonatePage = () => {
     <div className='font-poppins'>
         <div className='relative w-full flex flex-col items-center' style={{ backgroundImage: `url(${donatePageImage})` }}>
           <div className='flex flex-col items-center justify-center'>
-            <h1 className='text-6xl font-bold mt-20 mb-4'>Fuel Our Passion for <span className='text-red-700'>Football</span></h1>
-            <p className='text-lg mb-8 font-medium font-ptsans'>Every donation goes towards providing quality training and equipment for our players.</p>
+            <h1 className='text-6xl font-bold mt-20 mb-4 text-center'>Fuel Our Passion for <span className='text-red-700'>Football</span></h1>
+            <p className='text-lg mb-8 font-medium font-ptsans text-center'>Every donation goes towards providing quality training and equipment for our players.</p>
             <h1 className=' text-black rounded-lg py-2 px-4 mb-20 text-4xl font-bold'>Donate Now</h1>
           </div>
           <div className='absolute  -bottom-12'>
@@ -72,7 +72,7 @@ const DonatePage = () => {
   </h1></h1>
         <div className='relative h-72 w-full flex items-center justify-center'>
           
-          <h1 className='absolute top-2/4 text-4xl font-semibold h-full'>Thanks For Donation.</h1>
+          <h1 className='absolute top-2/4 text-4xl font-semibold h-full text-center'>Thanks For Donation.</h1>
         </div>
     </div>
   );

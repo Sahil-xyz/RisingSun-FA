@@ -12,7 +12,7 @@ import {
   getTeams,
   getTeamById,
   getBoysTeams,
-  getGirlsTeams
+  getGirlsTeams,
 } from '../controllers/user-controller.js';
 import authMiddleware from '../middlewares/auth-middleware.js';
 import signupSchema from "../validators/signup-validator.js";

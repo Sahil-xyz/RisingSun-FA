@@ -28,6 +28,15 @@ const OnlineAdmission = () => {
       return;
     }
 
+    if(!formData.name) {
+      toast.error("Name is required");
+      return;
+    }
+    if(!formData.dateOfBirth) {
+      toast.error("Date of Birth is required");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -48,10 +57,11 @@ const OnlineAdmission = () => {
     setLoading(false);
   };
 
+
   return (
-    <div className="p-10" style={{ backgroundImage: "url('https://prolevelacademy.com/wp-content/uploads/2022/07/New-HP1.jpg')" }}>
-      <div className="max-w-lg mx-auto p-20 bg-gray-400 shadow-md rounded-lg border border-gray-200">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Online Admission</h2>
+    <div className="p-10 bg-gradient-to-bl from-slate-100 to-slate-50" >
+      <div className="max-w-lg mx-auto p-20 shadow-md rounded-lg border border-gray-200 bg-white">
+        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Online Admission</h2>
         
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-1">Full Name</label>
@@ -61,7 +71,7 @@ const OnlineAdmission = () => {
             placeholder="Enter your full name" 
             value={formData.name} 
             onChange={handleChange} 
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-700"
           />
         </div>
 
@@ -72,7 +82,7 @@ const OnlineAdmission = () => {
             name="dateOfBirth" 
             value={formData.dateOfBirth} 
             onChange={handleChange} 
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-700"
           />
         </div>
 
@@ -82,7 +92,7 @@ const OnlineAdmission = () => {
             name="gender" 
             value={formData.gender} 
             onChange={handleChange} 
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-700"
           >
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -95,7 +105,7 @@ const OnlineAdmission = () => {
             name="role" 
             value={formData.role} 
             onChange={handleChange} 
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-700"
           >
             <option value="Striker">Striker</option>
             <option value="Defender">Defender</option>
@@ -107,7 +117,7 @@ const OnlineAdmission = () => {
         <button 
           onClick={handlePayment} 
           disabled={loading} 
-          className={`w-full py-3 mt-6 text-white rounded-lg ${loading ? 'bg-gray-500' : 'bg-green-600 hover:bg-green-700'} focus:outline-none`}
+          className={`w-full py-3 mt-6 text-white bg-gradient-to-r from-violet-600 to-indigo-600 rounded-lg ${loading ? 'bg-gray-500' : 'bg-green-600 hover:bg-green-700'} focus:outline-none`}
         >
           {loading ? 'Processing...' : 'Pay ₹1000'}
         </button>

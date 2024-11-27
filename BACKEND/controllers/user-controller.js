@@ -1,5 +1,4 @@
 import bcrypt from "bcryptjs";
-import crypto from "crypto";
 import { User } from "../models/user-model.js";
 import { Team } from "../models/team-model.js"
 import {
@@ -154,8 +153,6 @@ export const login = async (req, res) => {
     });
   }
 };
-
-// Google oauth signup
 
 // Logout
 export const logout = async (req, res) => {

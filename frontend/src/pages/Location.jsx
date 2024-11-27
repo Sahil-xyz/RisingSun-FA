@@ -2,24 +2,23 @@ import React from "react";
 
 const Location = () => {
   return (
-    <div className="bg-white text-black min-h-screen p-8">
-      <div className="container mx-auto space-y-12">
-        
+    <div className="bg-gradient-to-tr from-slate-300 to-slate-50 min-h-screen py-6 px-4 md:px-8 pt-20 font-poppins">
+      <div className="max-w-5xl mx-auto space-y-10">
         {/* Hero Section */}
         <section className="text-center">
-          <h1 className="text-5xl font-bold mb-4 text-yellow-400">Visit Us</h1>
-          <p className="text-lg text-black max-w-3xl mx-auto">
-            We are located in the heart of Goregaon West, Mumbai. Find our location, contact details, and directions below.
+          <h1 className="text-6xl font-ptsans font-extrabold text-gray-800 mb-4 bg-gradient-to-br from-red-500 to-red-900 bg-clip-text text-transparent">Visit Us</h1>
+          <p className="text-lg text-gray-600">
+            We are located in the heart of Bandra West, Mumbai. Explore our location, contact details, and directions below.
           </p>
         </section>
 
         {/* Map Section */}
-        <section className="space-y-8">
-          <h2 className="text-4xl font-semibold text-yellow-400 text-center">Our Location</h2>
-          <div className="rounded-lg overflow-hidden shadow-lg h-80">
+        <section className="space-y-6">
+          <h2 className="text-2xl font-semibold text-gray-800 text-center">Our Location</h2>
+          <div className="rounded-md overflow-hidden shadow-md">
             <iframe
-              className="w-full h-full"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.160058982797!2d72.84310117494644!3d19.17014584505932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b61437a366c5%3A0x2a5f8fa45d9ea9a9!2sUrban%20Sports%20Goregaon%2C%20Prabodhan%20Kridabhavan%20Maidan%2C%20near%20Ozone%20Swimming%20Pool%2C%20Siddharth%20Nagar%2C%20Goregaon%20West%2C%20Mumbai%2C%20Maharashtra%20400104!5e0!3m2!1sen!2sin!4v1619632593457!5m2!1sen!2sin"
+              className="w-full h-64 md:h-80"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1757.3349937034918!2d72.83224732933752!3d19.05110944131299!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c93959f1e5f5%3A0xabc4a60ff39b1c2!2sNeville%20D&#39;Souza%20Football%20Turf!5e0!3m2!1sen!2sin!4v1732628365152!5m2!1sen!2sin"
               allowFullScreen=""
               loading="lazy"
               title="Google Map of Academy Location"
@@ -28,42 +27,36 @@ const Location = () => {
         </section>
 
         {/* Contact Information */}
-        <section className="space-y-8">
-          <h2 className="text-4xl font-semibold text-yellow-400 text-center">Contact Information</h2>
-          <div className="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0 text-center md:text-left">
-            <div>
-              <h3 className="text-2xl font-bold text-yellow-300">Address</h3>
-              <p className="text-black">Urban Sports Goregaon, Prabodhan Kridabhavan Maidan, near Ozone Swimming Pool, Siddharth Nagar, Bandra West, Mumbai, Maharashtra 400104</p>
+        <section className="space-y-6">
+          <h2 className="text-2xl font-semibold text-gray-800 text-center">Contact Us</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-md shadow p-4 text-center">
+              <h3 className="text-lg font-bold text-gray-700">Phone</h3>
+              <p className="text-gray-600 mt-2">+91 8369419545</p>
             </div>
-            <div>
-              <h3 className="text-2xl font-bold text-yellow-300">Phone</h3>
-              <p className="text-black">+91 9322706770</p>  
+            <div className="bg-white rounded-md shadow p-4 text-center">
+              <h3 className="text-lg font-bold text-gray-700">Address</h3>
+              <p className="text-gray-600 mt-2">
+              Neville D'Souza Football Turf, KC Marg, Reclamation, Bandra West, Mumbai, Maharashtra 400050
+              </p>
             </div>
-            <div>
-              <h3 className="text-2xl font-bold text-yellow-300">Email</h3>
-              <p className="text-black">RisingSun1@gmail.com</p>
+            <div className="bg-white rounded-md shadow p-4 text-center">
+              <h3 className="text-lg font-bold text-gray-700">Email</h3>
+              <p className="text-gray-600 mt-2">risingsunfa@gmail.com</p>
             </div>
           </div>
         </section>
 
         {/* Operating Hours */}
-        <section className="space-y-8">
-          <h2 className="text-4xl font-semibold text-yellow-400 text-center">Operating Hours</h2>
-          <div className="flex justify-center">
-            <ul className="text-black">
+        <section className="space-y-6">
+          <h2 className="text-2xl font-semibold text-gray-800 text-center">Operating Hours</h2>
+          <div className="bg-white rounded-md shadow p-4 text-center">
+            <ul className="text-gray-600 space-y-1">
               <li>Monday - Friday: 8:00 AM - 6:00 PM</li>
               <li>Saturday: 9:00 AM - 4:00 PM</li>
               <li>Sunday: Closed</li>
             </ul>
           </div>
-        </section>
-
-        {/* Directions Section */}
-        <section className="bg-yellow-500 p-8 rounded-lg shadow-lg text-center">
-          <h2 className="text-3xl font-bold text-gray-900">Directions</h2>
-          <p className="text-lg text-gray-800 mt-4 max-w-3xl mx-auto">
-            Easily accessible from Siddharth Nagar, our academy is near the Ozone Swimming Pool. Look for Prabodhan Kridabhavan Maidan as a landmark.
-          </p>
         </section>
       </div>
     </div>

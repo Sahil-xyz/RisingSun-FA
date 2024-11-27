@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import toast from "react-hot-toast";
-// import { useGoogleLogin } from "@react-oauth/google";
-import loginImage from '../assets/loginImage-min.png'
+import loginImage from "../assets/loginImage-min.png";
 
 export const USER_API_END_POINT = `${process.env.REACT_APP_BACKEND_URL}api/v1/user/login`;
 
@@ -44,49 +43,40 @@ const Login = () => {
     }
   };
 
-  // const handleGoogleLogin = useGoogleLogin({
-    // onSuccess: async (tokenResponse) => {
-    //   try {
-    //     const res = await fetch("http://localhost:8000/api/v1/user/google-login", {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({ token: tokenResponse.access_token }),
-    //     });
-    //     const res_data = await res.json();
-
-    //     if (res.ok) {
-    //       storeTokenInLS(res_data.token);
-    //       toast.success("Google login successful");
-    //       navigate("/");
-    //     } else {
-    //       toast.error(res_data.message);
-    //     }
-    //   } catch (error) {
-    //     toast.error("Google login failed");
-    //   }
-    // },
-    // onError: () => toast.error("Google login failed"),
-  // });
-  const handleGoogleLogin = () => {
-    
-  }
-
   return (
-    <div className="flex items-center font-roboto justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: `url(${loginImage})` }}>
-      <div className="flex items-center sm:flex-row  md:w-3/4 bg-white bg-opacity-50 rounded-2xl border-2 border-white shadow-2xl p-8 sm:p-12 backdrop-blur-sm justify-center ml-12">
-        
-        <div className="w-screen sm:w-1/2">
-          <div className="flex justify-center items-center mb-8">
-            <div className="text-3xl font-bold text-red-500">Rising Sun Football Academy</div>
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: `url(${loginImage})` }}
+    >
+      {/* Back Button */}
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute mt-28 top-4 left-4 flex items-center px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+      >
+        <span className="text-lg font-semibold">&#8592; Back</span>
+      </button>
+
+      {/* Login Card */}
+      <div className="flex flex-col sm:flex-row w-11/12 md:w-3/4 lg:w-2/3 bg-white bg-opacity-70 rounded-lg border-2 border-white shadow-2xl p-6 sm:p-12 backdrop-blur-sm">
+        <div className="w-full sm:w-1/2 mx-auto">
+          <div className="text-center mb-6">
+            <h1 className="text-3xl font-bold text-red-500">
+              Rising Sun Football Academy
+            </h1>
           </div>
-          <h2 className="text-2xl font-bold mb-4 text-[#13293D] text-center">Login to Football Club</h2>
+          <h2 className="text-xl font-semibold mb-6 text-[#13293D] text-center">
+            Login to Football Club
+          </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+              <label
+                className="block text-gray-700 text-sm font-medium mb-2"
+                htmlFor="email"
+              >
                 Your Email
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
                 name="email"
                 type="email"
                 placeholder="Enter your email"
@@ -95,12 +85,15 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-medium mb-2"
+                htmlFor="password"
+              >
                 Your Password
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
                 name="password"
                 type="password"
                 placeholder="Enter your password"
@@ -109,12 +102,19 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="mb-6">
-              <Link to="/forget-password" className="text-blue-400 hover:text-blue-600">Forgot Password?</Link>
+            <div className="flex justify-end mb-4">
+              <Link
+                to="/forget-password"
+                className="text-sm text-blue-500 hover:underline"
+              >
+                Forgot Password?
+              </Link>
             </div>
-            <div className="mb-4">
+            <div>
               <button
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
+                className={`w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-lg transition duration-200 ${
+                  loading ? "opacity-70 cursor-not-allowed" : ""
+                }`}
                 type="submit"
                 disabled={loading}
               >
@@ -122,22 +122,7 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <div className="flex justify-center mb-4">
-            <button
-              className="flex items-center justify-center w-full border border-gray-300 hover:bg-gray-100 text-gray-700 font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
-              onClick={handleGoogleLogin}
-              type="button"
-            >
-              <svg className="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                <path fill="#EA4335" d="M24 9.5c3.6 0 6.7 1.2 9.3 3.4l7-7C35.5 2 30.2 0 24 0 14.8 0 6.9 5.4 3 13.3l7.8 6.1C12.6 13.5 17.8 9.5 24 9.5z" />
-                <path fill="#34A853" d="M46.5 24c0-1.6-.2-3.2-.5-4.7H24v9.1h12.6c-.6 3.2-2.4 5.9-5 7.8l7.8 6C44 37 46.5 31 46.5 24z" />
-                <path fill="#4A90E2" d="M11.5 28.6c-2.2-.6-4.2-1.7-5.9-3.1L-1 33c3.9 7.9 11.8 13.3 21 13.3 5.8 0 11.1-2 15.2-5.2l-7.8-6c-2.2 1.5-5 2.4-7.9 2.4-6.1 0-11.3-4.1-13.2-9.8z" />
-                <path fill="#FBBC05" d="M24 48c6.5 0 11.9-2.1 15.8-5.7l-7.8-6c-2.5 1.7-5.7 2.8-8.8 2.8-7.2 0-13.3-4.9-15.4-11.5L3 33.5C7.1 42.6 14.7 48 24 48z" />
-              </svg>
-              Google
-            </button>
-          </div>
-          <p className="text-center text-black">
+          <p className="text-center mt-6 text-gray-700">
             Don't have an account?{" "}
             <Link to="/register" className="text-blue-500 hover:underline">
               Register
@@ -145,8 +130,6 @@ const Login = () => {
           </p>
         </div>
       </div>
-      {/* <div className="w-full">
-      </div> */}
     </div>
   );
 };
